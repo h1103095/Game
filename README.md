@@ -1,4 +1,4 @@
-#BIRD STRIKE
+# BIRD STRIKE
 2학년 윈도우즈 프로그래밍 프로젝트  
 
 ## 게임 설명
