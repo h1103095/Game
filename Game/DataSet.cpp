@@ -1,6 +1,8 @@
 #include "StdAfx.h"
 #include "DataSet.h"
 
+#pragma comment(lib, "odbc32.lib")
+
 
 CDataSet::CDataSet(void)
 	: m_bOpenSession(false)
@@ -33,23 +35,27 @@ bool CDataSet::Open(void)
 	GetModuleFileName(NULL, programpath, _MAX_PATH);
 	strPath = programpath;
 	index = strPath.ReverseFind('\\');
+	strPath = strPath.Left(index);
+	index = strPath.ReverseFind('\\');
 	strPath = strPath.Left(index + 1);
 
 	CString dbFilePath;
-	dbFilePath.Format(_T("%sScoreDB.accdb"), strPath);
+	dbFilePath.Format(_T("%sScoreDB.mdb"), strPath);
 
 	CString strConnect;
-	strConnect.Format(_T("Provider=Microsoft.ace.oledb.12.0;Data Source=%s"), dbFilePath);
+	strConnect.Format(_T("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=%s"), dbFilePath);
 
 	hr = db.OpenFromInitializationString(strConnect);
 	if(FAILED(hr))
 	{
+		TRACE(strConnect);
 		return m_bOpenSession = false;
 	}
 
 	hr = m_dbSession.Open(db);
 	if(FAILED(hr))
 	{
+		TRACE(_T("!!!\n"));
 		return m_bOpenSession = false;
 	}
 
