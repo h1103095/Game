@@ -1,17 +1,20 @@
 #pragma once
 #include "atltypes.h"
-class Coin
+#include "GameObject.h"
+
+class Coin: GameObject
 {
 public:
 	Coin(void);
-	~Coin(void);
-	int m_nX;
-	int m_nY;
-	CRect m_rect;
 	Coin(int y);
 	Coin(int x, int y);
+	~Coin(void);
+
 	void move(void);
-	CRect getRect(void);
 	int getX(void);
+	CRect getRect(void);
+
+private:
+	CRect m_rect;
 };
 

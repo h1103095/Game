@@ -2,11 +2,9 @@
 #include "Coin.h"
 
 
-Coin::Coin(void)
-	: m_nX(0)
-	, m_nY(0)
-{
-
+Coin::Coin(void) {
+	position = Vector2(0, 0);
+	scale = Vector2(100, 100);
 }
 
 
@@ -15,25 +13,22 @@ Coin::~Coin(void)
 }
 
 
-Coin::Coin(int y)
-{
-	m_nX = 1200;
-	m_nY = y;
-	m_rect = CRect(m_nX, m_nY, m_nX+100, m_nY+100);
+Coin::Coin(int y) {
+	position = Vector2(0, y);
+	m_rect = CRect(position.get_x(), position.get_y(), position.get_x() + scale.get_x(), position.get_y() + scale.get_y());
 }
 
 Coin::Coin(int x, int y)
 {
-	m_nX = x;
-	m_nY = y;
-	m_rect = CRect(m_nX, m_nY, m_nX+100, m_nY+100);
+	position = Vector2(x, y);
+	m_rect = CRect(position.get_x(), position.get_y(), position.get_x() + scale.get_x(), position.get_y() + scale.get_y());
 }
 
 
 void Coin::move(void)
 {
-	m_nX -= 4;
-	m_rect.SetRect(m_nX, m_nY, m_nX+100, m_nY+100);
+	position.x -= 4;
+	m_rect = CRect(position.get_x(), position.get_y(), position.get_x() + scale.get_x(), position.get_y() + scale.get_y());
 }
 
 
@@ -45,5 +40,5 @@ CRect Coin::getRect(void)
 
 int Coin::getX(void)
 {
-	return m_nX;
+	return position.get_x();
 }

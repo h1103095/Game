@@ -23,8 +23,6 @@ Ground::~Ground(void)
 	
 }
 
-// ??? ???
-
 
 void Ground::move(void)
 {
