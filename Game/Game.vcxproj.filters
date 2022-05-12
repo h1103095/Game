@@ -13,17 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="소스 파일\Objects">
-      <UniqueIdentifier>{71279448-0b57-4361-ae2c-a0591a369d67}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\Scenes">
-      <UniqueIdentifier>{16de45d1-919e-4754-9a1a-02d8a490c7c5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Scenes">
       <UniqueIdentifier>{a866938a-80e5-4651-9c77-34191901cea6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\Objects">
-      <UniqueIdentifier>{6651359d-d625-444b-823e-272a7159c4b4}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\Components">
       <UniqueIdentifier>{cff6e26f-4885-40b6-b7c7-71190ea25174}</UniqueIdentifier>
@@ -31,25 +22,37 @@
     <Filter Include="헤더 파일\Components">
       <UniqueIdentifier>{a291fb55-93aa-47a4-b704-17553a2acc82}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Objects">
+      <UniqueIdentifier>{71279448-0b57-4361-ae2c-a0591a369d67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Objects">
+      <UniqueIdentifier>{6651359d-d625-444b-823e-272a7159c4b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Scenes">
+      <UniqueIdentifier>{16de45d1-919e-4754-9a1a-02d8a490c7c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Animators">
+      <UniqueIdentifier>{b707ce92-da13-4f25-9286-24e86c67ef4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Animators">
+      <UniqueIdentifier>{ca597f31-2ec4-4d49-9070-c2d2ede3ebf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\AnimationStates">
+      <UniqueIdentifier>{df312e47-7726-4d5e-bd84-81d26408027c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Enums">
+      <UniqueIdentifier>{1172d6bf-f0ec-4e74-9796-13b03c74030e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Enums">
+      <UniqueIdentifier>{6c0ba0c3-2c2d-47a3-8619-f5933c8d1a56}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
     <None Include="UserImages.bmp">
       <Filter>리소스 파일</Filter>
     </None>
-    <None Include="res\Game.rc2">
-      <Filter>리소스 파일</Filter>
-    </None>
-    <None Include="res\GameDoc.ico">
-      <Filter>리소스 파일</Filter>
-    </None>
     <None Include="res\Game.ico">
-      <Filter>리소스 파일</Filter>
-    </None>
-    <None Include="res\Toolbar.bmp">
-      <Filter>리소스 파일</Filter>
-    </None>
-    <None Include="res\Toolbar256.bmp">
       <Filter>리소스 파일</Filter>
     </None>
     <None Include="res\BackGround.bmp">
@@ -80,6 +83,9 @@
       <Filter>리소스 파일</Filter>
     </None>
     <None Include="res\main.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\Game.rc2">
       <Filter>리소스 파일</Filter>
     </None>
   </ItemGroup>
@@ -117,6 +123,21 @@
     <ClInclude Include="StartMenuScene.h">
       <Filter>헤더 파일\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponent.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Rigidbody.h">
+      <Filter>헤더 파일\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>헤더 파일\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
@@ -129,23 +150,32 @@
     <ClInclude Include="Ground.h">
       <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponent.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="Collider.h">
+      <Filter>헤더 파일\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>헤더 파일\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>헤더 파일\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAnimator.h">
+      <Filter>헤더 파일\Animators</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentID.h">
+      <Filter>헤더 파일\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="LayerID.h">
+      <Filter>헤더 파일\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>헤더 파일\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Rigidbody.h">
-      <Filter>헤더 파일\Components</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +206,21 @@
     <ClCompile Include="InGameScene.cpp">
       <Filter>소스 파일\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameComponent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Rigidbody.cpp">
+      <Filter>소스 파일\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>소스 파일\Components</Filter>
+    </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
@@ -188,28 +233,78 @@
     <ClCompile Include="Ground.cpp">
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Vector2.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="GameComponent.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="Collider.cpp">
+      <Filter>소스 파일\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>소스 파일\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>소스 파일\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAnimator.cpp">
+      <Filter>소스 파일\Animators</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentID.cpp">
+      <Filter>소스 파일\Enums</Filter>
+    </ClCompile>
+    <ClCompile Include="LayerID.cpp">
+      <Filter>소스 파일\Enums</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>소스 파일\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Rigidbody.cpp">
-      <Filter>소스 파일\Components</Filter>
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
       <Filter>리소스 파일</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\bitmap4.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bird_walk1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bird_walk2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bird_walk3.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bird_walk4.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bird_fly1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bird_fly2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bird_attack1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bird_attack2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bird_die.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\GameDoc.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\Toolbar256.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
 </Project>

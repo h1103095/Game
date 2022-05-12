@@ -1,22 +1,32 @@
 #pragma once
 #include <vector>
-#include "GameObject.h"
-using std::vector;
 
-class GameScene : public CView
-{
+#include "afxwin.h"
+#include "GameObject.h"
+#include "Game.h"
+#include "MainFrm.h"
+#include "GameDoc.h"
+
+class GameScene : public CView {
+	DECLARE_DYNCREATE(GameScene);
+
 public:
 	GameScene(void);
 	~GameScene(void);
 	void UpdateScene(void);
-	void Draw(void);
-private:
-	
+	virtual void OnDraw(CDC* pDC);
+#ifdef _DEBUG
+	virtual void AssertValid() const;
+#ifndef _WIN32_WCE
+	virtual void Dump(CDumpContext& dc) const;
+#endif
+#endif
 
-public:
+	virtual void OnInitialUpdate();
 
-private:
+	void AddGameObject(GameObject* gameObject);
+
+protected:
 	float fps;
-	vector<GameObject> m_vecGameObjects;
+	std::vector<GameObject> gameObjects;
 };
-

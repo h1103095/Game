@@ -1,17 +1,19 @@
 #pragma once
 #include "atltypes.h"
-class Ground
+#include "GameObject.h"
+#include "Collider.h"
+#include "Rigidbody.h"
+
+class Rigidbody;
+
+class Ground: GameObject
 {
 public:
-	Ground(void);
-	Ground(int);
+	Ground(int x, int y, int width, int height);
 	~Ground(void);
-	CRect m_rect;
-	void move(void);
-	CRect getRect(void);
-	int m_nX;
-	int getX(void);
-	bool isCollider(CRect);
-	bool m_bCollided;
+
+private:
+	Collider collider;
+	Rigidbody rigidbody;
 };
 

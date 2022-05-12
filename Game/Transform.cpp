@@ -22,35 +22,35 @@ Transform::Transform(Vector2 position, Vector2 scale)
 
 }
 
-Vector2 Transform::get_position(void) {
+Vector2 Transform::GetPosition(void) {
 	return position;
 }
 
-Vector2 Transform::get_scale(void) {
+Vector2 Transform::GetScale(void) {
 	return scale;
 }
 
-void Transform::translate(int x, int y) {
+void Transform::Translate(int x, int y) {
 	position = Vector2(x, y);
 }
 
-void Transform::translate(Vector2 position) {
+void Transform::Translate(Vector2 position) {
 	this->position = position;
 }
 
-void Transform::set_scale(int x, int y) {
+void Transform::SetScale(int x, int y) {
 	scale = Vector2(x, y);
 }
 
-void Transform::set_scale(Vector2 scale) {
+void Transform::SetScale(Vector2 scale) {
 	this->scale = scale;
 }
 
-void Transform::move(int x, int y) {
+void Transform::Move(int x, int y) {
 	position.x += x;
 	position.y += y;
 }
 
-void Transform::move(Vector2 vec) {
+void Transform::Move(Vector2 vec) {
 	position += vec;
 }
