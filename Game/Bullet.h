@@ -1,16 +1,18 @@
 #pragma once
 #include "atltypes.h"
-class Bullet
+#include "GameObject.h"
+
+class Bullet : public GameObject
 {
 public:
-	Bullet(void);
-	Bullet(CPoint, CPoint);
-	~Bullet(void);
-	CPoint m_pDistination;
-	CPoint m_pPoint;
+	Bullet(CPoint playerPoint, CPoint dest);
+	virtual ~Bullet(void);
 	void Move(void);
-	CPoint getPoint(void);
-	double m_dDistance;
-	double m_dDegree;
+
+private:
+	CPoint destination_;
+	const float kSpeed = 17;
+	double distance_;
+	double degree_;
 };
 

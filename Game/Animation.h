@@ -6,12 +6,12 @@
 
 class Sprite;
 
-class Animation: GameComponent
+class Animation: public GameComponent
 {
 public:
 	Animation(GameObject* parent);
 	~Animation(void);
 	void AddSprite(Sprite* sprite);
 private:
-	std::vector<Sprite*> sprites;
+	std::vector<Sprite*> sprites_;
 };

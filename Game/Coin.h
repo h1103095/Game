@@ -6,14 +6,13 @@
 #include "Sprite.h"
 #include "Game.h"
 
-class Coin: GameObject
+class Coin: public GameObject
 {
 public:
 	Coin(int x, int y);
 	~Coin(void);
 
 private:
-	Rigidbody rigidbody;
-	Sprite* sprite;
+	
 };
 

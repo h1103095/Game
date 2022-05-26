@@ -1,14 +1,15 @@
 #include "stdafx.h"
 #include "GameComponent.h"
 
-GameComponent::GameComponent(GameObject* parent, ComponentID id) {
-	this->parent = parent, this->id = id;
+GameComponent::GameComponent(GameObject* pParent, ComponentID id) 
+	:parent_(pParent), id_(id)
+{
 }
 
 GameComponent::~GameComponent(void) {
 
 }
 
-ComponentID GameComponent::GetID(void) {
-	return id;
+ComponentID GameComponent::GetID(void) const {
+	return id_;
 }

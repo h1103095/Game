@@ -2,12 +2,22 @@
 #include "GameObject.h"
 
 
-GameObject::GameObject(void) {
-	transform = Transform(Vector2(0, 0), Vector2(1, 1));
+GameObject::GameObject(void)
+	: transform_(Transform(Vector2(0, 0), Vector2(1, 1)))
+{
+	
 }
 
-GameObject::GameObject(int x, int y, int width, int height) {
-	transform = Transform(Vector2(x, y), Vector2(width, height));
+GameObject::GameObject(int x, int y)
+	: transform_(Transform(Vector2(x, y), Vector2(1, 1)))
+{
+
+}
+
+GameObject::GameObject(int x, int y, int width, int height)
+	: transform_(Transform(Vector2(x, y), Vector2(width, height)))
+{
+	
 }
 
 GameObject::~GameObject(void) {
@@ -22,16 +32,17 @@ void GameObject::Update(void) {
 
 }
 
-Transform* GameObject::GetTransform(void) {
-	return &transform;
+void GameObject::AddComponent(GameComponent* component) {
+	components_.insert({ component->GetID(), component });
 }
 
-template<typename T> T* GameObject::GetComponent(void) {
-	for (int i = 0; i < components.size(); i++) {
-		if (typeid(T).name().compare(typeid(components[i]).name()) == 0) {
-			return static_cast<T*>(&components[i]);
-			//return &components[i];
-		}
-	}
-	return nullptr;
+Transform* GameObject::GetTransform(void){
+	return &transform_;
 }
+
+GameComponent* GameObject::GetComponent(ComponentID id) {
+	std::map<ComponentID, GameComponent*>::iterator i = components_.find(id);
+	return i == components_.end() ? nullptr : i->second;
+}
+
+

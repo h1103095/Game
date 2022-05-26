@@ -2,26 +2,29 @@
 #include "Sprite.h"
 
 
-Sprite::Sprite(GameObject* parent, int ID, LayerID layerID)
-	:GameComponent(parent, ComponentID::SPRITE)
+Sprite::Sprite(GameObject* parent, int bitmapID, LayerID layerID)
+	: GameComponent(parent, ComponentID::SPRITE)
+	, transform_(parent->GetTransform())
+	, kLayerID(layerID)
 {
-	this->transform = parent->GetTransform();
-	this->layerID = layerID;
-	image.LoadBitmap(ID);
+	image_.LoadBitmap(bitmapID);
+	BITMAP bitmap;
+	image_.GetBitmap(&bitmap);
+	transform_->SetScale(static_cast<int>(bitmap.bmWidth), static_cast<int>(bitmap.bmHeight));
 }
 
 Sprite::~Sprite(void) {
 
 }
 
-LayerID Sprite::GetLayerID(void) {
-	return layerID;
+LayerID Sprite::GetLayerID(void) const {
+	return kLayerID;
 }
 
-CBitmap* Sprite::GetImage(void) {
-	return &image;
+CBitmap* Sprite::GetBitmap(void) {
+	return &image_;
 }
 
 Transform* Sprite::GetTransform(void) {
-	return transform;
+	return transform_.get();
 }

@@ -4,14 +4,15 @@
 #include "GameComponent.h"
 #include "Transform.h"
 
-class Collider: GameComponent
+class Collider: public GameComponent
 {
 public:
 	Collider(GameObject* parent);
-	~Collider(void);
-	bool OnColliderEnter(GameObject* gameObject);
+	virtual ~Collider(void);
+	bool OnColliderEnter(GameObject* game_object) const;
 	CRect* GetRect(void);
+
 private:
-	CRect rect;
+	CRect rect_;
 };
 

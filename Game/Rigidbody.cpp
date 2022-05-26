@@ -5,13 +5,15 @@
 Rigidbody::Rigidbody(GameObject* parent, bool use_gravity) 
 	: GameComponent(parent, ComponentID::RIGIDBODY)
 {
-	this->transform = parent->GetTransform();
-	this->use_gravity = use_gravity;
+	this->transform_ = parent->GetTransform();
+	this->use_gravity_ = use_gravity;
 
-	Vector2 position = transform->GetPosition();
-	Vector2 scale = transform->GetScale();
+	Vector2* position = transform_->GetPosition();
+	Vector2* scale = transform_->GetScale();
 
-	rect = CRect((int)position.x, (int)position.y, (int)(position.x + scale.x), (int)(position.y + scale.y));
+	rect_ = CRect(position->get_int_x(), position->get_int_y(),
+		position->get_int_x() + scale->get_int_x(),
+		position->get_int_y() + scale->get_int_y());
 }
 
 Rigidbody::~Rigidbody() {

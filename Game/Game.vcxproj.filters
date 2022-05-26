@@ -55,37 +55,28 @@
     <None Include="res\Game.ico">
       <Filter>리소스 파일</Filter>
     </None>
-    <None Include="res\BackGround.bmp">
+    <None Include="res\Bean.bmp">
       <Filter>리소스 파일</Filter>
     </None>
-    <None Include="res\bean.bmp">
-      <Filter>리소스 파일</Filter>
-    </None>
-    <None Include="res\bird.bmp">
-      <Filter>리소스 파일</Filter>
-    </None>
-    <None Include="res\cannon.bmp">
+    <None Include="res\Cannon.bmp">
       <Filter>리소스 파일</Filter>
     </None>
     <None Include="res\GameStartBT.bmp">
       <Filter>리소스 파일</Filter>
     </None>
-    <None Include="res\ground.bmp">
-      <Filter>리소스 파일</Filter>
-    </None>
     <None Include="res\QuitGameBT.bmp">
       <Filter>리소스 파일</Filter>
     </None>
-    <None Include="res\coin.bmp">
+    <None Include="res\Coin.bmp">
       <Filter>리소스 파일</Filter>
     </None>
-    <None Include="res\wall.bmp">
+    <None Include="res\Wall.bmp">
       <Filter>리소스 파일</Filter>
     </None>
-    <None Include="res\main.bmp">
+    <None Include="res\Title.bmp">
       <Filter>리소스 파일</Filter>
     </None>
-    <None Include="res\Game.rc2">
+    <None Include="res\BackGround.bmp">
       <Filter>리소스 파일</Filter>
     </None>
   </ItemGroup>
@@ -117,7 +108,7 @@
     <ClInclude Include="GameObject.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="InGameScene.h">
+    <ClInclude Include="aInGameScene.h">
       <Filter>헤더 파일\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="StartMenuScene.h">
@@ -177,6 +168,15 @@
     <ClInclude Include="Transform.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="InGameScene.h">
+      <Filter>헤더 파일\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneID.h">
+      <Filter>헤더 파일\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -203,7 +203,7 @@
     <ClCompile Include="StartMenuScene.cpp">
       <Filter>소스 파일\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="InGameScene.cpp">
+    <ClCompile Include="aInGameScene.cpp">
       <Filter>소스 파일\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Vector2.cpp">
@@ -260,6 +260,15 @@
     <ClCompile Include="Transform.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="InGameScene.cpp">
+      <Filter>소스 파일\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneID.cpp">
+      <Filter>소스 파일\Enums</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
@@ -267,34 +276,31 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\bitmap4.bmp">
+    <Image Include="res\BirdWalk1.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="res\bird_walk1.bmp">
+    <Image Include="res\BirdWalk2.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="res\bird_walk2.bmp">
+    <Image Include="res\BirdWalk3.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="res\bird_walk3.bmp">
+    <Image Include="res\BirdWalk4.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="res\bird_walk4.bmp">
+    <Image Include="res\BirdFly1.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="res\bird_fly1.bmp">
+    <Image Include="res\BirdFly2.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="res\bird_fly2.bmp">
+    <Image Include="res\BirdAttack1.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="res\bird_attack1.bmp">
+    <Image Include="res\BirdAttack2.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="res\bird_attack2.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\bird_die.bmp">
+    <Image Include="res\BirdDie.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="res\GameDoc.ico">
@@ -304,6 +310,21 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="res\Toolbar256.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmap4.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\GroundLeft.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\GroundMid.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\GroundRight.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\GroundSingle.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

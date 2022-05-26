@@ -6,12 +6,12 @@
 class GameObject;
 class Animation;
 
-class Animator: GameComponent
+class Animator: public GameComponent
 {
 public:
 	Animator(GameObject* parent);
 	~Animator(void);
-	void ChangeAnimation(Animation* currentAnimation, Animation* nextAnimation);
+	void ChangeAnimation(Animation* current_animation, Animation* next_animation);
 private:
 
 };

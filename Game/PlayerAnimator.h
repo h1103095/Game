@@ -2,7 +2,7 @@
 #include "Animation.h"
 #include "Animator.h"
 
-class PlayerAnimator: Animator
+class PlayerAnimator: public Animator
 {
 public:
 	PlayerAnimator(GameObject* parent);

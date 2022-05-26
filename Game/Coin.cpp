@@ -3,12 +3,12 @@
 
 
 Coin::Coin(int x, int y) 
-	: GameObject(x, y, 100, 100), rigidbody(this, false)
+	: GameObject(x, y, 100, 100)
 {
-	sprite = new Sprite(this, IDB_COIN, LayerID::OTHER);
+	//sprite = new Sprite(this, IDB_COIN, LayerID::OTHER);
 }
 
 Coin::~Coin(void)
 {
-	delete sprite;
+
 }

@@ -13,5 +13,5 @@ Animation::~Animation(void) {
 }
 
 void Animation::AddSprite(Sprite* sprite) {
-	sprites.push_back(sprite);
+	sprites_.push_back(sprite);
 }

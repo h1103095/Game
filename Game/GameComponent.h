@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include "ComponentID.h"
 #include "GameObject.h"
 
@@ -8,11 +9,11 @@ class GameComponent
 {
 public:
 	GameComponent(GameObject* parent, ComponentID id);
-	~GameComponent(void);
-	ComponentID GetID(void);
+	virtual ~GameComponent(void);
+	ComponentID GetID(void) const;
 
 protected:
-	GameObject* parent;
-	ComponentID id;
+	std::tr1::shared_ptr<GameObject> parent_;
+	const ComponentID id_;
 };
 
