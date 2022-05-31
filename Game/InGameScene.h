@@ -1,11 +1,7 @@
 #pragma once
 #include "GameScene.h"
-#include "GameObject.h"
-#include "BackGround.h"
-#include "Ground.h"
-#include "Player.h"
-#include "Coin.h"
-#include "Enemy.h"
+//#include "IGameObjectFactory.h"
+#include "GameObjectFactory.h"
 
 class GameScene;
 

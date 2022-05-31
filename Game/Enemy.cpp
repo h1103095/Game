@@ -1,14 +1,2 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "Enemy.h"
-#include <random>
-
-
-Enemy::Enemy(void)
-{
-}
-
-
-Enemy::~Enemy(void)
-{
-	
-}

@@ -3,13 +3,13 @@
 #include <math.h>
 
 
-Bullet::Bullet(CPoint playerPoint, CPoint dest)
-	: GameObject(playerPoint.x, playerPoint.y, 1, 1)
-	, destination_(dest)		// 목적지
-	, distance_(sqrt(pow(static_cast<double>(destination_.x) - static_cast<double>(playerPoint.x), 2) +
-		pow(static_cast<double>(destination_.y) - static_cast<double>(playerPoint.y), 2)))	// 거리 계산
-	, degree_(atan2f(static_cast<float>(destination_.y - playerPoint.y), 
-		static_cast<float>(destination_.x - playerPoint.x)))		// 각도 계산
+Bullet::Bullet(GameScene* game_scene, Vector2 position, Vector2 scale)
+	: GameObject(game_scene, position, scale)
+	, destination_(Vector2::zero())		// 목적지
+	, distance_(sqrt(pow(static_cast<double>(destination_.x) - static_cast<double>(position.x), 2) +
+		pow(static_cast<double>(destination_.y) - static_cast<double>(position.y), 2)))	// 거리 계산
+	, degree_(atan2f(static_cast<float>(destination_.y - position.y), 
+		static_cast<float>(destination_.x - position.x)))		// 각도 계산
 {
 }
 

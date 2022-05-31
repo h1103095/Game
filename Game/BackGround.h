@@ -1,5 +1,4 @@
 #pragma once
-#include "MainFrm.h"
 #include "GameObject.h"
 #include "Sprite.h"
 #include "Rigidbody.h"
@@ -7,12 +6,14 @@
 class BackGround: public GameObject
 {
 public:
-	BackGround(int x, int y);
-	BackGround(int x, int y, int width, int height);
+	BackGround(GameScene* scene, Vector2 position, Vector2 scale);
 	virtual ~BackGround(void);
+	virtual void Update(void);
 
 private:
 	Sprite sprite_;
 	Rigidbody rigidbody_;
+	const float kWidth;
+	const float kXSpeed = -10.0;
+	
 };
-

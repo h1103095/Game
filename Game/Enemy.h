@@ -1,11 +1,5 @@
 #pragma once
-#include "atltypes.h"
-#include "GameObject.h"
-
-class Enemy: public GameObject
+class Enemy
 {
-public:
-	Enemy(void);
-	~Enemy(void);
 };
 

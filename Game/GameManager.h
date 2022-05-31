@@ -4,10 +4,13 @@
 class GameManager : GameObject
 {
 public:
-	GameManager(void);
-	~GameManager(void);
+	GameManager(GameScene* game_scene, Vector2 position, Vector2 scale);
+	virtual ~GameManager(void);
 	void GenerateGround(void);
-private:
 
+private:
+	static bool instantiated_;
 };
+
+bool GameManager::instantiated_ = false;
 

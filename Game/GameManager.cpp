@@ -2,12 +2,15 @@
 #include "GameManager.h"
 
 
-GameManager::GameManager(void) {
-
+GameManager::GameManager(GameScene* game_scene, Vector2 position, Vector2 scale) 
+	: GameObject(game_scene, position, scale)
+{
+	assert(!instantiated_);
+	instantiated_ = true;
 }
 
 GameManager::~GameManager(void) {
-
+	instantiated_ = false;
 }
 
 void GameManager::GenerateGround(void) {

@@ -2,7 +2,7 @@
 #include "Animation.h"
 
 
-Animation::Animation(GameObject* parent)
+Animation::Animation(IGameObject* parent)
 	: GameComponent(parent, ComponentID::ANIMATION)
 {
 

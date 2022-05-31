@@ -3,21 +3,22 @@
 #include "Vector2.h"
 #include "GameComponent.h"
 #include "LayerID.h"
+#include "Transform.h"
 
-class GameObject;
 class Transform;
 
 class Sprite: public GameComponent {
 
 public:
-	Sprite(GameObject* parent, int bitmapID, LayerID layerID);
+	Sprite(IGameObject* parent, int bitmap_id, LayerID layer_id);
 	virtual ~Sprite(void);
+	void SetBitmap(int bitmap_id);
+	std::shared_ptr<CBitmap> GetBitmap(void);
 	LayerID GetLayerID(void) const;
-	CBitmap* GetBitmap(void);
 	Transform* GetTransform(void);
 private:
 	const LayerID kLayerID;
-	std::tr1::shared_ptr<Transform> transform_;
-	CBitmap image_;
+	std::shared_ptr<Transform> transform_;
+	std::shared_ptr<CBitmap> image_ = nullptr;
 };
 

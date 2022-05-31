@@ -2,15 +2,15 @@
 #include "Transform.h"
 
 Transform::Transform()
-	: position_(Vector2(0, 0))
-	, scale_(Vector2(1, 1))
+	: position_(Vector2::zero())
+	, scale_(Vector2::normal())
 {
 
 }
 
 Transform::Transform(Vector2 position)
 	: position_(position)
-	, scale_(Vector2(1, 1))
+	, scale_(Vector2::normal())
 {
 
 }

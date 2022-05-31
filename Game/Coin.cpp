@@ -2,8 +2,8 @@
 #include "Coin.h"
 
 
-Coin::Coin(int x, int y) 
-	: GameObject(x, y, 100, 100)
+Coin::Coin(GameScene* game_scene, Vector2 position, Vector2 scale) 
+	: GameObject(game_scene, position, scale)
 {
 	//sprite = new Sprite(this, IDB_COIN, LayerID::OTHER);
 }

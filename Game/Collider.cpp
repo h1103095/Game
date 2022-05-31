@@ -2,7 +2,7 @@
 #include "Collider.h"
 
 
-Collider::Collider(GameObject* parent) 
+Collider::Collider(IGameObject* parent)
 	: GameComponent(parent, ComponentID::COLLIDER)
 	, rect_(new CRect())
 {
@@ -23,7 +23,7 @@ Collider::~Collider(void) {
 
 }
 
-bool Collider::OnColliderEnter(GameObject* gameObject) const {
+bool Collider::OnColliderEnter(IGameObject* gameObject) const {
 	CRect dstRect;
 	/*
 	if (IntersectRect(&dstRect, &rect, gameObject->GetComponent<Collider>()->GetRect())) {

@@ -1,15 +1,15 @@
 #pragma once
 #include "Vector2.h"
-#include "GameObject.h"
+#include "IGameObject.h"
 #include "GameComponent.h"
 #include "Transform.h"
 
 class Collider: public GameComponent
 {
 public:
-	Collider(GameObject* parent);
+	Collider(IGameObject* parent);
 	virtual ~Collider(void);
-	bool OnColliderEnter(GameObject* game_object) const;
+	bool OnColliderEnter(IGameObject* game_object) const;
 	CRect* GetRect(void);
 
 private:
