@@ -22,9 +22,11 @@ public:
 	virtual void AddComponent(GameComponent* component);
 	virtual GameObject* Create(GameScene* scene, Vector2 position, Vector2 normal);
 	virtual Transform* GetTransform(void);
+	virtual GameScene* GetGameScene(void);
 	GameComponent* GetComponent(ComponentID id);
 
 protected:
+	float delta_time_;
 	GameScene* scene_;
 	Transform transform_;
 	std::map<ComponentID, GameComponent*> components_;

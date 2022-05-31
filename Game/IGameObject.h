@@ -3,6 +3,7 @@
 #include "ComponentID.h"
 
 class GameComponent;
+class GameScene;
 class Transform;
 
 class IGameObject
@@ -14,5 +15,6 @@ public:
 	virtual void Update(void) = 0;
 	virtual GameComponent* GetComponent(ComponentID id) = 0;
 	virtual Transform* GetTransform(void) = 0;
+	virtual GameScene* GetGameScene(void) = 0;
 };
 

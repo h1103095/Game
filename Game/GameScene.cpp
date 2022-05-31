@@ -64,6 +64,11 @@ void GameScene::Instantiate(IGameObjectFactory* factory, Vector2 position, Vecto
 	AddGameObject(game_object);
 }
 
+const int GameScene::GetTimerCycle(void)
+{
+	return kTimerCycle;
+}
+
 void GameScene::OnTimer(UINT_PTR nIDEvent) {
 	CView::OnTimer(nIDEvent);
 

@@ -4,7 +4,7 @@
 Ground::Ground(GameScene* game_scene, Vector2 position, Vector2 scale)
 	: GameObject(game_scene, position, scale)
 	, sprite_(this, IDB_GROUND_SINGLE, LayerID::GROUND)
-	, rigidbody_(this, false)
+	, rigidbody_(this, &delta_time_, false)
 	, collider_(this)
 {
 }

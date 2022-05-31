@@ -23,6 +23,7 @@ public:
 	void DrawGameObjects(CDC* dc);
 	void AddGameObject(IGameObject* game_object);
 	void Instantiate(IGameObjectFactory* factory, Vector2 position = Vector2::zero(), Vector2 scale = Vector2::normal());
+	const int GetTimerCycle(void);
 
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnDestroy();
