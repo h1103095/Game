@@ -34,34 +34,38 @@ void GameScene::DrawGameObjects(CDC* dc) {
 	for (const auto& layer : v_layer) {
 		for (auto& sprite : sprites_[layer]) {
 			object_dc.SelectObject(sprite->GetBitmap().get());
-			Transform* transform = sprite->GetTransform();
-			dc->TransparentBlt(transform->GetPosition()->get_int_x(), transform->GetPosition()->get_int_y(),
-				transform->GetScale()->get_int_x(), transform->GetScale()->get_int_y(),
-				&object_dc, 0, 0, transform->GetScale()->get_int_x(), transform->GetScale()->get_int_y(), RGB(255, 0, 255));
+			Transform& transform = sprite->GetTransform();
+			Vector2<int>& position = transform.GetPosition();
+			Vector2<int>& scale = transform.GetScale();
+			dc->TransparentBlt(position.get_x(), position.get_y(), scale.get_x(), scale.get_y(),
+				&object_dc, 0, 0, scale.get_x(), scale.get_y(), RGB(255, 0, 255));
+			TRACE("transform: %f, %f\n", position.get_x(), position.get_y());
+			TRACE("transform: %d, %d\n", position.get_x(), position.get_y());
 		}
 	}
 
 	object_dc.DeleteDC();
 }
 
-void GameScene::AddGameObject(IGameObject* game_object) {
+void GameScene::AddGameObject(std::shared_ptr<IGameObject> game_object) {
 	// vector에 오브젝트 포인터를 추가
 	// GameObject의 Start 함수 호출
 	// 오브젝트들로부터 sprite를 받아옴. layerID로 정렬
 	game_objects_.push_back(game_object);
 	game_object->Start();
 
-	Sprite* sprite = static_cast<Sprite*>(game_object->GetComponent(ComponentID::SPRITE));
+	Sprite* sprite = game_object.get()->GetSprite();
 	if (sprite != nullptr) {
 		sprites_[sprite->GetLayerID()].push_back(sprite);
 	}
 }
 
-void GameScene::Instantiate(IGameObjectFactory* factory, Vector2 position, Vector2 scale)
+std::shared_ptr<IGameObject> GameScene::Instantiate(IGameObjectFactory* factory, Vector2<int> position, Vector2<int> scale)
 {
-	IGameObject* game_object = factory->Create(this, position, scale);
+	std::shared_ptr<IGameObject> game_object = factory->Create(*this, position, scale);
 
 	AddGameObject(game_object);
+	return game_object;
 }
 
 const int GameScene::GetTimerCycle(void)
@@ -72,9 +76,15 @@ const int GameScene::GetTimerCycle(void)
 void GameScene::OnTimer(UINT_PTR nIDEvent) {
 	CView::OnTimer(nIDEvent);
 
+	static ULONGLONG prev_time = GetTickCount64();
+
+	ULONGLONG cur_time = GetTickCount64();
+	float delta_time = (cur_time - prev_time) * 0.001f;
+	prev_time = cur_time;
+
 	// 오브젝트들을 업데이트
-	for (IGameObject* gameObject : game_objects_) {
-		gameObject->Update();
+	for (auto gameObject : game_objects_) {
+		gameObject.get()->Update(delta_time);
 	}
 
 	// 화면 그리기

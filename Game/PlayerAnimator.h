@@ -5,7 +5,7 @@
 class PlayerAnimator: public Animator
 {
 public:
-	PlayerAnimator(IGameObject* parent);
+	PlayerAnimator(IGameObject& parent);
 	~PlayerAnimator(void);
 private:
 	/*

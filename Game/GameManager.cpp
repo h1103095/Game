@@ -1,19 +1,102 @@
 #include "stdafx.h"
 #include "GameManager.h"
 
+bool GameManager::instantiated_ = false;
 
-GameManager::GameManager(GameScene* game_scene, Vector2 position, Vector2 scale) 
-	: GameObject(game_scene, position, scale)
+GameManager::GameManager(GameScene& game_scene)
+	: GameObject(game_scene)
+	, cur_ground_length_(100 * kNumInitGrounds + 100)		// 10개의 땅으로 시작
+	, cur_ground_height_(600)
+	, ground_in_high_pos_(false)
 {
 	assert(!instantiated_);
 	instantiated_ = true;
+	CreateStraightGround(kNumInitGrounds, Vector2<int>(100, cur_ground_height_));
 }
 
 GameManager::~GameManager(void) {
 	instantiated_ = false;
 }
 
-void GameManager::GenerateGround(void) {
+std::shared_ptr<Ground> GameManager::CreateGround(Vector2<int> position) {
+	return std::static_pointer_cast<Ground>(scene_.Instantiate(new GameObjectFactory<Ground>(), position));
+}
+
+void GameManager::CreateStraightGround(int num_ground, Vector2<int> position) {
+	std::shared_ptr<Ground> ground;
+	int i = 1;
+
+	ground = CreateGround(position);
+	if (num_ground >= 1) {
+		ground.get()->SetBitmap(IDB_GROUND_LEFT);
+	}
+
+	for (; i < num_ground; i++) {
+		ground = CreateGround(position + Vector2<int>(i * 100, 0));
+		ground.get()->SetBitmap(IDB_GROUND_MID);
+	}
+
+	ground = CreateGround(position + Vector2<int>(i * 100, 0));
+	ground.get()->SetBitmap(IDB_GROUND_RIGHT);
+}
+
+void GameManager::CreateGroundPattern(GroundPatternID pattern_id, Vector2<int> position) {
+	switch (pattern_id) {
+	case GroundPatternID::STRAIGHT:
+		CreateStraightGround(10, Vector2<int>(WND_X, cur_ground_height_));
+		cur_ground_length_ = 1000;
+		break;
+	case GroundPatternID::JUMP:
+		CreateStraightGround(4, Vector2<int>(WND_X, cur_ground_height_));
+		CreateStraightGround(1, Vector2<int>(550, cur_ground_height_ + 300));
+		CreateStraightGround(4, Vector2<int>(WND_X + 700, cur_ground_height_));
+		cur_ground_length_ = 1100;
+		break;
+	case GroundPatternID::HOLE:
+		CreateStraightGround(4, Vector2<int>(WND_X, cur_ground_height_));
+		CreateStraightGround(4, Vector2<int>(WND_X + 700, cur_ground_height_));
+		cur_ground_length_ = 1100;
+		break;
+	case GroundPatternID::HOLES_EASY:
+		CreateStraightGround(2, Vector2<int>(WND_X, cur_ground_height_));
+		CreateStraightGround(2, Vector2<int>(WND_X + 400, cur_ground_height_));
+		CreateStraightGround(2, Vector2<int>(WND_X + 800, cur_ground_height_));
+		CreateStraightGround(2, Vector2<int>(WND_X + 1200, cur_ground_height_));
+		cur_ground_length_ = 1400;
+		break;
+	case GroundPatternID::HOLES_HARD1:
+		CreateStraightGround(1, Vector2<int>(WND_X, cur_ground_height_));
+		CreateStraightGround(1, Vector2<int>(WND_X + 500, cur_ground_height_));
+		CreateStraightGround(1, Vector2<int>(WND_X + 900, cur_ground_height_));
+		cur_ground_length_ = 1000;
+		break;
+	case GroundPatternID::HOLES_HARD2:
+		CreateStraightGround(1, Vector2<int>(WND_X, cur_ground_height_));
+		CreateStraightGround(1, Vector2<int>(WND_X + 600, cur_ground_height_));
+		CreateStraightGround(1, Vector2<int>(WND_X + 1200, cur_ground_height_));
+		cur_ground_length_ = 1300;
+		break;
+	case GroundPatternID::STAIRS:
+		if (!ground_in_high_pos_) {
+			CreateStraightGround(3, Vector2<int>(WND_X, cur_ground_height_));
+			CreateStraightGround(3, Vector2<int>(WND_X + 400, cur_ground_height_ + 200));
+			CreateStraightGround(3, Vector2<int>(WND_X + 800, cur_ground_height_ + 400));
+			cur_ground_height_ += 400;
+		}
+		else {
+			CreateStraightGround(3, Vector2<int>(WND_X, cur_ground_height_));
+			CreateStraightGround(3, Vector2<int>(WND_X + 400, cur_ground_height_ - 200));
+			CreateStraightGround(3, Vector2<int>(WND_X + 800, cur_ground_height_ - 400));
+			cur_ground_height_ -= 400;
+		}
+		ground_in_high_pos_ = !ground_in_high_pos_;
+		cur_ground_length_ = 1100;
+		break;
+	}
+
+
+	//Ground* ground = static_cast<Ground*>(scene_->Instantiate(new GameObjectFactory<Ground>(), Vector2(100, 600)));
+
 	/*
 	static DWORD dwTime = GetTickCount();
 	DWORD dwCurTime = GetTickCount();

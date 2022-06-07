@@ -12,9 +12,9 @@ class GameObjectFactory: public IGameObjectFactory
 public:
 	GameObjectFactory(void) {};
 	virtual ~GameObjectFactory(void) {};
-	virtual IGameObject* FactoryMethod(GameScene* scene, Vector2 position, Vector2 scale)
+	virtual std::shared_ptr<IGameObject> FactoryMethod(GameScene& scene, Vector2<int> position, Vector2<int> scale)
 	{
-		return new T(scene, position, scale);
+		return std::make_shared<T>(scene, position, scale);
 	}
 };
 

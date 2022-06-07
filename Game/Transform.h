@@ -4,19 +4,17 @@
 class Transform
 {
 public:
-	Transform(void);
-	Transform(Vector2 position);
-	Transform(Vector2 position, Vector2 scale);
-	Vector2* GetPosition(void);
-	Vector2* GetScale(void);
-	void Translate(float x, float y);
-	void Translate(Vector2& position);
-	void SetScale(float x, float y);
-	void SetScale(Vector2& scale);
-	void Move(float x, float y);
-	void Move(Vector2& vec);
+	Transform(Vector2<int> position=Vector2<int>::zero(), Vector2<int> scale=Vector2<int>::normal());
+	Vector2<int>& GetPosition(void);
+	Vector2<int>& GetScale(void);
+	void Translate(int x, int y);
+	void Translate(Vector2<int>& position);
+	void SetScale(int x, int y);
+	void SetScale(Vector2<int>& scale);
+	void Move(int x, int y);
+	void Move(Vector2<int>& vec);
 private:
-	Vector2 position_;
-	Vector2 scale_;
+	Vector2<int> position_;
+	Vector2<int> scale_;
 };
 

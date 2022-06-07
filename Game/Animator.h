@@ -6,7 +6,7 @@
 class Animator: public GameComponent
 {
 public:
-	Animator(IGameObject* parent);
+	Animator(IGameObject& parent);
 	~Animator(void);
 	void ChangeAnimation(Animation* current_animation, Animation* next_animation);
 private:

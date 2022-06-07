@@ -6,6 +6,7 @@
 #include "afxwin.h"
 #include "Game.h"
 #include "GameDoc.h"
+#include "GameScene.h"
 #include "IGameObject.h"
 #include "IGameObjectFactory.h"
 #include "Sprite.h"
@@ -21,8 +22,8 @@ public:
 	virtual ~GameScene(void);
 	void UpdateScene(void);
 	void DrawGameObjects(CDC* dc);
-	void AddGameObject(IGameObject* game_object);
-	void Instantiate(IGameObjectFactory* factory, Vector2 position = Vector2::zero(), Vector2 scale = Vector2::normal());
+	void AddGameObject(std::shared_ptr<IGameObject> game_object);
+	std::shared_ptr<IGameObject> Instantiate(IGameObjectFactory* factory, Vector2<int> position = Vector2<int>::zero(), Vector2<int> scale = Vector2<int>::normal());
 	const int GetTimerCycle(void);
 
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
@@ -40,7 +41,7 @@ public:
 
 protected:
 	DECLARE_MESSAGE_MAP()
-	std::vector<IGameObject*> game_objects_;
+	std::vector<std::shared_ptr<IGameObject>> game_objects_;
 	std::map<LayerID, std::vector<Sprite*>> sprites_;
 	const int kTimerCycle = 15;
 };

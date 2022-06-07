@@ -1,55 +1,41 @@
 #include "stdafx.h"
 #include "Transform.h"
 
-Transform::Transform()
-	: position_(Vector2::zero())
-	, scale_(Vector2::normal())
-{
-
-}
-
-Transform::Transform(Vector2 position)
-	: position_(position)
-	, scale_(Vector2::normal())
-{
-
-}
-
-Transform::Transform(Vector2 position, Vector2 scale)
+Transform::Transform(Vector2<int> position, Vector2<int> scale)
 	: position_(position)
 	, scale_(scale)
 {
 
 }
 
-Vector2* Transform::GetPosition(void){
-	return &position_;
+Vector2<int>& Transform::GetPosition(void){
+	return position_;
 }
 
-Vector2* Transform::GetScale(void){
-	return &scale_;
+Vector2<int>& Transform::GetScale(void){
+	return scale_;
 }
 
-void Transform::Translate(float x, float y) {
-	position_ = Vector2(x, y);
+void Transform::Translate(int x, int y) {
+	position_.set_x_y(x, y);
 }
 
-void Transform::Translate(Vector2& position) {
+void Transform::Translate(Vector2<int>& position) {
 	position_ = position;
 }
 
-void Transform::SetScale(float x, float y) {
-	scale_ = Vector2(x, y);
+void Transform::SetScale(int x, int y) {
+	scale_.set_x_y(x, y);
 }
 
-void Transform::SetScale(Vector2& scale) {
+void Transform::SetScale(Vector2<int>& scale) {
 	scale_ = scale;
 }
 
-void Transform::Move(float x, float y) {
+void Transform::Move(int x, int y) {
 	position_.add(x, y);
 }
 
-void Transform::Move(Vector2& vec) {
+void Transform::Move(Vector2<int>& vec) {
 	position_ += vec;
 }

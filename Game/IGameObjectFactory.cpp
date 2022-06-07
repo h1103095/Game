@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "IGameObjectFactory.h"
 
-IGameObject* IGameObjectFactory::Create(GameScene* scene, Vector2 position, Vector2 scale)
+std::shared_ptr<IGameObject> IGameObjectFactory::Create(GameScene& scene, Vector2<int> position, Vector2<int> scale)
 {
 	return FactoryMethod(scene, position, scale);
 }

@@ -7,10 +7,10 @@
 class Collider: public GameComponent
 {
 public:
-	Collider(IGameObject* parent);
+	Collider(IGameObject& parent);
 	virtual ~Collider(void);
 	bool OnColliderEnter(IGameObject* game_object) const;
-	CRect* GetRect(void);
+	CRect& GetRect(void);
 
 private:
 	CRect rect_;

@@ -46,11 +46,17 @@
     <Filter Include="헤더 파일\Enums">
       <UniqueIdentifier>{6c0ba0c3-2c2d-47a3-8619-f5933c8d1a56}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\Factory">
+    <Filter Include="소스 파일\Managers">
+      <UniqueIdentifier>{9452ad60-b748-445a-a0df-960a95f09813}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Factories">
+      <UniqueIdentifier>{0826e6ea-6c24-47d0-b2ca-81bb10f77bd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Factories">
       <UniqueIdentifier>{ef918efb-428b-4734-96e8-dc147d15485e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Factory">
-      <UniqueIdentifier>{0826e6ea-6c24-47d0-b2ca-81bb10f77bd3}</UniqueIdentifier>
+    <Filter Include="헤더 파일\Managers">
+      <UniqueIdentifier>{fb30213d-de76-4ff3-ba60-63209e3a4a6d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -150,9 +156,6 @@
     <ClInclude Include="PlayerAnimator.h">
       <Filter>헤더 파일\Animators</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>헤더 파일\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="ComponentID.h">
       <Filter>헤더 파일\Enums</Filter>
     </ClInclude>
@@ -184,13 +187,19 @@
       <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
     <ClInclude Include="IGameObjectFactory.h">
-      <Filter>헤더 파일\Factory</Filter>
+      <Filter>헤더 파일\Factories</Filter>
     </ClInclude>
     <ClInclude Include="GameObjectFactory.h">
-      <Filter>헤더 파일\Factory</Filter>
+      <Filter>헤더 파일\Factories</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>헤더 파일\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GroundPatternID.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -251,9 +260,6 @@
     <ClCompile Include="PlayerAnimator.cpp">
       <Filter>소스 파일\Animators</Filter>
     </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>소스 파일\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="ComponentID.cpp">
       <Filter>소스 파일\Enums</Filter>
     </ClCompile>
@@ -285,13 +291,19 @@
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
     <ClCompile Include="IGameObjectFactory.cpp">
-      <Filter>소스 파일\Factory</Filter>
+      <Filter>소스 파일\Factories</Filter>
     </ClCompile>
     <ClCompile Include="GameObjectFactory.cpp">
-      <Filter>소스 파일\Factory</Filter>
+      <Filter>소스 파일\Factories</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>소스 파일\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GroundPatternID.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

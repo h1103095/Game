@@ -7,16 +7,15 @@
 class Rigidbody: public GameComponent
 {
 public:
-	Rigidbody(IGameObject* parent, float* delta_time, bool use_gravity);
+	Rigidbody(IGameObject& parent, float& delta_time, bool use_gravity);
 	virtual ~Rigidbody();
 	void AddForce(float dx, float dy);
-	virtual void Update(void);
+	virtual void Update(const float& delta_time);
 
 private:
-	float* delta_time_;
+	Transform& transform_;
 	float x_speed_ = 0.0;
 	float y_speed_ = 0.0;
-	std::shared_ptr<Transform> transform_;
 	bool use_gravity_;
 };
 

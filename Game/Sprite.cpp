@@ -2,9 +2,9 @@
 #include "Sprite.h"
 
 
-Sprite::Sprite(IGameObject* parent, int bitmap_id, LayerID layer_id)
+Sprite::Sprite(IGameObject& parent, int bitmap_id, LayerID layer_id)
 	: GameComponent(parent, ComponentID::SPRITE)
-	, transform_(parent->GetTransform())
+	, transform_(parent.GetTransform())
 	, kLayerID(layer_id)
 {
 	SetBitmap(bitmap_id);
@@ -19,7 +19,7 @@ void Sprite::SetBitmap(int bitmap_id) {
 	image_->LoadBitmap(bitmap_id);
 	BITMAP bitmap;
 	image_->GetBitmap(&bitmap);
-	transform_->SetScale(static_cast<int>(bitmap.bmWidth), static_cast<int>(bitmap.bmHeight));
+	transform_.SetScale(static_cast<int>(bitmap.bmWidth), static_cast<int>(bitmap.bmHeight));
 }
 
 std::shared_ptr<CBitmap> Sprite::GetBitmap(void) {
@@ -30,6 +30,6 @@ LayerID Sprite::GetLayerID(void) const {
 	return kLayerID;
 }
 
-Transform* Sprite::GetTransform(void) {
-	return transform_.get();
+Transform& Sprite::GetTransform(void) {
+	return transform_;
 }

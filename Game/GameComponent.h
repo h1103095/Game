@@ -6,13 +6,13 @@
 class GameComponent
 {
 public:
-	GameComponent(IGameObject* parent, ComponentID id);
+	GameComponent(IGameObject& parent, ComponentID id);
 	virtual ~GameComponent(void);
 	ComponentID GetID(void) const;
-	virtual void Update(void);
+	virtual void Update(const float& delta_time);
 
 protected:
-	IGameObject* parent_;
+	IGameObject& parent_;
 	const ComponentID id_;
 };
 

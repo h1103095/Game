@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PlayerAnimator.h"
 
-PlayerAnimator::PlayerAnimator(IGameObject* parent)
+PlayerAnimator::PlayerAnimator(IGameObject& parent)
 	: Animator(parent)
 {
 	/*

@@ -10,15 +10,15 @@ class Transform;
 class Sprite: public GameComponent {
 
 public:
-	Sprite(IGameObject* parent, int bitmap_id, LayerID layer_id);
+	Sprite(IGameObject& parent, int bitmap_id, LayerID layer_id);
 	virtual ~Sprite(void);
 	void SetBitmap(int bitmap_id);
 	std::shared_ptr<CBitmap> GetBitmap(void);
 	LayerID GetLayerID(void) const;
-	Transform* GetTransform(void);
+	Transform& GetTransform(void);
 private:
 	const LayerID kLayerID;
-	std::shared_ptr<Transform> transform_;
+	Transform& transform_;
 	std::shared_ptr<CBitmap> image_ = nullptr;
 };
 

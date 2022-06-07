@@ -6,14 +6,13 @@
 class BackGround: public GameObject
 {
 public:
-	BackGround(GameScene* scene, Vector2 position, Vector2 scale);
+	BackGround(GameScene& scene, Vector2<int> position, Vector2<int> scale);
 	virtual ~BackGround(void);
-	virtual void Update(void);
+	virtual void Update(const float& delta_time);
 
 private:
 	Sprite sprite_;
 	Rigidbody rigidbody_;
-	const float kWidth;
-	const float kXSpeed = -100.0;
-	
+	const int kWidth;
+	const float kXSpeed = -100.0f;
 };

@@ -6,7 +6,7 @@
 class Player: public GameObject
 {
 public:
-	Player(GameScene* game_scene, Vector2 position, Vector2 scale);
+	Player(GameScene& game_scene, Vector2<int> position, Vector2<int> scale);
 	virtual ~Player(void);
 
 private:

@@ -9,7 +9,7 @@
 class Coin: public GameObject
 {
 public:
-	Coin(GameScene* game_scene, Vector2 position, Vector2 scale);
+	Coin(GameScene& game_scene, Vector2<int> position, Vector2<int> scale);
 	virtual ~Coin(void);
 };
 

@@ -213,6 +213,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectFactory.h" />
+    <ClInclude Include="GroundPatternID.h" />
     <ClInclude Include="IGameObjectFactory.h" />
     <ClInclude Include="IGameObject.h" />
     <ClInclude Include="LayerID.h" />
@@ -250,6 +251,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
+    <ClCompile Include="GroundPatternID.cpp" />
     <ClCompile Include="IGameObjectFactory.cpp" />
     <ClCompile Include="IGameObject.cpp" />
     <ClCompile Include="LayerID.cpp" />

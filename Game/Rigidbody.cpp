@@ -2,10 +2,9 @@
 #include "Rigidbody.h"
 
 
-Rigidbody::Rigidbody(IGameObject* parent, float* delta_time, bool use_gravity)
+Rigidbody::Rigidbody(IGameObject& parent, float& delta_time, bool use_gravity)
 	: GameComponent(parent, ComponentID::RIGIDBODY)
-	, delta_time_(delta_time)
-	, transform_(parent->GetTransform())
+	, transform_(parent.GetTransform())
 	, use_gravity_(use_gravity)
 {
 
@@ -20,6 +19,6 @@ void Rigidbody::AddForce(float dx, float dy) {
 	y_speed_ += dy;
 }
 
-void Rigidbody::Update(void) {
-	transform_->Move(x_speed_ * (*delta_time_), y_speed_ * (*delta_time_));
+void Rigidbody::Update(const float& delta_time) {
+	transform_.Move(static_cast<int>(x_speed_ * delta_time), static_cast<int>(y_speed_ * delta_time));
 }
