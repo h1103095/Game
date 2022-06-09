@@ -13,10 +13,10 @@ public:
 	}
 	~Vector2(void) {}
 
-	static Vector2<T> zero(void) {
+	static Vector2<T> Zero(void) {
 		return Vector2<T>(0, 0);
 	}
-	static Vector2<T> normal(void) {
+	static Vector2<T> Normal(void) {
 		return Vector2<T>(1, 1);
 	}
 
@@ -29,24 +29,24 @@ public:
 		return *this;
 	}
 
-	void set_x(T x) {
+	void SetX(T x) {
 		this->x = x;
 	}
-	void set_y(T y) {
+	void SetY(T y) {
 		this->y = y;
 	}
-	void set_x_y(T x, T y) {
+	void SetXY(T x, T y) {
 		this->x = x;
 		this->y = y;
 	}
 
-	T get_x(void) const {
+	T GetX(void) const {
 		return x;
 	}
-	T get_y(void) const {
+	T GetY(void) const {
 		return y;
 	}
-	void add(T x, T y) {
+	void Add(T x, T y) {
 		this->x += x;
 		this->y += y;
 	}

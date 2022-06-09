@@ -17,25 +17,25 @@ Vector2<int>& Transform::GetScale(void){
 }
 
 void Transform::Translate(int x, int y) {
-	position_.set_x_y(x, y);
+	position_.Add(x, y);
 }
 
-void Transform::Translate(Vector2<int>& position) {
+void Transform::Translate(const Vector2<int>& vec) {
+	position_ += vec;
+}
+
+void Transform::SetPosition(int x, int y) {
+	position_.SetXY(x, y);
+}
+
+void Transform::SetPosition(Vector2<int> position) {
 	position_ = position;
 }
 
 void Transform::SetScale(int x, int y) {
-	scale_.set_x_y(x, y);
+	scale_.SetXY(x, y);
 }
 
-void Transform::SetScale(Vector2<int>& scale) {
+void Transform::SetScale(Vector2<int> scale) {
 	scale_ = scale;
-}
-
-void Transform::Move(int x, int y) {
-	position_.add(x, y);
-}
-
-void Transform::Move(Vector2<int>& vec) {
-	position_ += vec;
 }

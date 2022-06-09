@@ -198,8 +198,14 @@
     <ClInclude Include="GameManager.h">
       <Filter>헤더 파일\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="GameObjectTag.h">
+      <Filter>헤더 파일\Enums</Filter>
+    </ClInclude>
     <ClInclude Include="GroundPatternID.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -302,8 +308,14 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>소스 파일\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="GameObjectTag.cpp">
+      <Filter>소스 파일\Enums</Filter>
+    </ClCompile>
     <ClCompile Include="GroundPatternID.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Enums</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>소스 파일\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

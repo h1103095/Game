@@ -2,17 +2,14 @@
 #include "Collider.h"
 
 
-Collider::Collider(IGameObject& parent)
+Collider::Collider(IGameObject& parent, Vector2<int> position, Vector2<int> scale)
 	: GameComponent(parent, ComponentID::COLLIDER)
-	, rect_(new CRect())
+	, rect_()
 {
-	Transform& transform = parent.GetTransform();
-	Vector2<int>& position = transform.GetPosition();
-	Vector2<int>& scale = transform.GetScale();
-	int pos_x = position.get_x();
-	int pos_y = position.get_y();
-	int scale_x = scale.get_x();
-	int scale_y = scale.get_y();
+	int pos_x = position.GetX();
+	int pos_y = position.GetY();
+	int scale_x = scale.GetX();
+	int scale_y = scale.GetY();
 	rect_.left = pos_x;
 	rect_.top = pos_y;
 	rect_.right = pos_x + scale_x;

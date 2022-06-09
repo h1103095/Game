@@ -213,6 +213,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectFactory.h" />
+    <ClInclude Include="GameObjectTag.h" />
     <ClInclude Include="GroundPatternID.h" />
     <ClInclude Include="IGameObjectFactory.h" />
     <ClInclude Include="IGameObject.h" />
@@ -234,6 +235,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector2.h" />
+    <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
@@ -251,6 +253,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
+    <ClCompile Include="GameObjectTag.cpp" />
     <ClCompile Include="GroundPatternID.cpp" />
     <ClCompile Include="IGameObjectFactory.cpp" />
     <ClCompile Include="IGameObject.cpp" />
@@ -275,6 +278,7 @@
     </ClCompile>
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vector2.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

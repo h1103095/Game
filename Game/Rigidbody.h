@@ -7,7 +7,7 @@
 class Rigidbody: public GameComponent
 {
 public:
-	Rigidbody(IGameObject& parent, float& delta_time, bool use_gravity);
+	Rigidbody(IGameObject& parent, bool use_gravity);
 	virtual ~Rigidbody();
 	void AddForce(float dx, float dy);
 	virtual void Update(const float& delta_time);

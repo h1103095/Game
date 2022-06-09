@@ -12,6 +12,7 @@
 #include "Sprite.h"
 #include "Collider.h"
 #include "LayerID.h"
+#include "GameObjectTag.h"
 
 
 class GameScene : public CView {
@@ -23,8 +24,8 @@ public:
 	void UpdateScene(void);
 	void DrawGameObjects(CDC* dc);
 	void AddGameObject(std::shared_ptr<IGameObject> game_object);
-	std::shared_ptr<IGameObject> Instantiate(IGameObjectFactory* factory, Vector2<int> position = Vector2<int>::zero(), Vector2<int> scale = Vector2<int>::normal());
-	const int GetTimerCycle(void);
+	std::shared_ptr<IGameObject> Instantiate(IGameObjectFactory& factory, Vector2<int> position = Vector2<int>::Zero(), Vector2<int> scale = Vector2<int>::Normal());
+	void Destroy(std::shared_ptr<IGameObject> game_object);
 
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnDestroy();
@@ -41,7 +42,9 @@ public:
 
 protected:
 	DECLARE_MESSAGE_MAP()
-	std::vector<std::shared_ptr<IGameObject>> game_objects_;
+	std::map<GameObjectTag, std::vector<std::shared_ptr<IGameObject>>> game_objects_;
+	std::map<GameObjectTag, std::vector<std::shared_ptr<IGameObject>>> game_objects_to_delete_;
+	std::map<GameObjectTag, std::vector<std::shared_ptr<IGameObject>>> game_objects_to_add_;
 	std::map<LayerID, std::vector<Sprite*>> sprites_;
 	const int kTimerCycle = 15;
 };

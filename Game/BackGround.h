@@ -14,5 +14,5 @@ private:
 	Sprite sprite_;
 	Rigidbody rigidbody_;
 	const int kWidth;
-	const float kXSpeed = -100.0f;
+	const float kXSpeed = -150.0f;
 };

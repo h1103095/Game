@@ -2,7 +2,8 @@
 #include "GameObject.h"
 
 GameObject::GameObject(GameScene& scene, Vector2<int> position, Vector2<int> scale)
-	: scene_(scene)
+	: tag_(GameObjectTag::DEFAULT)
+	, scene_(scene)
 	, transform_(Transform(position, scale))
 {
 	
@@ -17,12 +18,6 @@ void GameObject::Start(void) {
 }
 
 void GameObject::Update(const float& delta_time) {
-	static ULONGLONG prev_time = GetTickCount64();
-
-	ULONGLONG cur_time = GetTickCount64();
-	delta_time_ = (cur_time - prev_time) * 0.001f;
-	prev_time = cur_time;
-
 	for (auto component : components_) {
 		component.second->Update(delta_time);
 	}
@@ -30,6 +25,10 @@ void GameObject::Update(const float& delta_time) {
 
 void GameObject::AddComponent(GameComponent* component) {
 	components_.insert({ component->GetID(), component });
+}
+
+const GameObjectTag GameObject::GetTag(void) const {
+	return tag_;
 }
 
 GameComponent* GameObject::GetComponent(ComponentID id) {

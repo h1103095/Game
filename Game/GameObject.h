@@ -3,7 +3,6 @@
 #include <map>
 #include <memory>
 #include "resource.h"
-#include "ComponentID.h"
 #include "IGameObject.h"
 #include "Vector2.h"
 #include "Transform.h"
@@ -21,6 +20,7 @@ public:
 	virtual void Start(void);
 	virtual void Update(const float& delta_time);
 	virtual void AddComponent(GameComponent* component);
+	virtual const GameObjectTag GetTag(void) const;
 	virtual GameComponent* GetComponent(ComponentID id);
 	virtual Sprite* GetSprite(void);
 	virtual Transform& GetTransform(void);
@@ -29,9 +29,9 @@ public:
 	GameObject* Create(GameScene& scene, Vector2<int> position, Vector2<int> normal);
 
 protected:
-	float delta_time_;
+	GameObjectTag tag_;
 	GameScene& scene_;
 	Transform transform_;
 	std::map<ComponentID, GameComponent*> components_;
-	GameObject(GameScene& scene, Vector2<int> position=Vector2<int>::zero(), Vector2<int> scale=Vector2<int>::normal());
+	GameObject(GameScene& scene, Vector2<int> position=Vector2<int>::Zero(), Vector2<int> scale=Vector2<int>::Normal());
 };

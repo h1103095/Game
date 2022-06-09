@@ -3,6 +3,7 @@
 #include "BackGround.h"
 #include "Ground.h"
 #include "Player.h"
+#include "Wall.h"
 
 class GameScene;
 
@@ -21,3 +22,4 @@ public:
 template class GameObjectFactory<BackGround>;
 template class GameObjectFactory<Ground>;
 template class GameObjectFactory<Player>;
+template class GameObjectFactory<Wall>;

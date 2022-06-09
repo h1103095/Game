@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Sprite.h"
 #include "Animator.h"
+#include "Rigidbody.h"
 
 class Player: public GameObject
 {
@@ -12,5 +13,7 @@ public:
 private:
 	Sprite sprite_;
 	Animator animator_;
+	Rigidbody rigidbody_;
+	Collider collider_;
 };
 
