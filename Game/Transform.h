@@ -9,6 +9,7 @@ public:
 	Vector2<int>& GetScale(void);
 	void Translate(int x, int y);
 	void Translate(const Vector2<int>& vec);
+	void Translate(const Vector2<float>& vec);
 	void SetPosition(int x, int y);
 	void SetPosition(Vector2<int> position);
 	void SetScale(int x, int y);

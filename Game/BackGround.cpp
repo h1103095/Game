@@ -17,8 +17,6 @@ BackGround::~BackGround(void)
 
 void BackGround::Update(const float& delta_time)
 {
-	GameObject::Update(delta_time);
-
 	if (transform_.GetPosition().GetX() <= -kWidth) {
 		transform_.Translate(kWidth * 2, 0);
 	}

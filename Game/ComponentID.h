@@ -1,7 +1,6 @@
 #pragma once
 enum class ComponentID
 {
-	BASE,
 	ANIMATION,
 	ANIMATOR,
 	COLLIDER,

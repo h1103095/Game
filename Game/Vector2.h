@@ -28,6 +28,14 @@ public:
 		y += vec.y;
 		return *this;
 	}
+	Vector2<T> operator*(const T& val) {
+		return Vector2<T>(x * val, y * val);
+	}
+
+	void Add(T x, T y) {
+		this->x += x;
+		this->y += y;
+	}
 
 	void SetX(T x) {
 		this->x = x;
@@ -46,9 +54,9 @@ public:
 	T GetY(void) const {
 		return y;
 	}
-	void Add(T x, T y) {
-		this->x += x;
-		this->y += y;
+	
+	Vector2<T> reverse(void) {
+		return Vector2<T>(-1 * x, -1 * y);
 	}
 
 	T x;

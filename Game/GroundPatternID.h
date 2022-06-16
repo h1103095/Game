@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+
 enum class GroundPatternID
 {
 	STRAIGHT	=	0,
@@ -8,6 +10,15 @@ enum class GroundPatternID
 	HOLES_HARD1	=	4,
 	HOLES_HARD2	=	5,
 	STAIRS		=	6,
-	SIZE		=	7
+};
+
+static const std::vector<GroundPatternID> v_ground_pattern_id{
+	GroundPatternID::STRAIGHT,
+	GroundPatternID::HOLE,
+	GroundPatternID::HOLES_EASY1,
+	GroundPatternID::HOLES_EASY2,
+	GroundPatternID::HOLES_HARD1,
+	GroundPatternID::HOLES_HARD2,
+	GroundPatternID::STAIRS,
 };
 

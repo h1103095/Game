@@ -13,6 +13,6 @@ public:
 
 protected:
 	IGameObject& parent_;
-	const ComponentID id_;
+	const ComponentID kComponentID_;
 };
 

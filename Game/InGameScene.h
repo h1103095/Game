@@ -11,7 +11,4 @@ public:
 	InGameScene(void);
 	virtual ~InGameScene(void);
 	virtual void OnInitialUpdate(void);
-
-private:
-	
 };

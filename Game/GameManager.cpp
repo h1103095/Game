@@ -24,7 +24,7 @@ void GameManager::Update(const float& delta_time) {
 	if (GetTickCount64() > last_spawn_time_ + time_between_spawn_) {
 		last_spawn_time_ = GetTickCount64();
 
-		GroundPatternID pattern = static_cast<GroundPatternID>(rand() % static_cast<int>(GroundPatternID::SIZE));
+		GroundPatternID pattern = v_ground_pattern_id[rand() % v_ground_pattern_id.size()];
 		CreateGroundPattern(pattern);
 #ifdef DEBUG
 		TRACE("last spawn time: %u\t\t pattern id: %d\n", last_spawn_time_, pattern);

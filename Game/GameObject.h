@@ -19,7 +19,10 @@ public:
 	virtual ~GameObject(void);
 	virtual void Start(void);
 	virtual void Update(const float& delta_time);
+	virtual void UpdateComponents(const float& delta_time);
 	virtual void AddComponent(GameComponent* component);
+	virtual void OnCollisionEnter(const Collision& collision);
+	virtual void OnTriggerEnter(const Collision& collision);
 	virtual const GameObjectTag GetTag(void) const;
 	virtual GameComponent* GetComponent(ComponentID id);
 	virtual Sprite* GetSprite(void);

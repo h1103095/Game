@@ -24,6 +24,10 @@ void Transform::Translate(const Vector2<int>& vec) {
 	position_ += vec;
 }
 
+void Transform::Translate(const Vector2<float>& vec) {
+	position_.Add(static_cast<int>(vec.GetX()), static_cast<int>(vec.GetY()));
+}
+
 void Transform::SetPosition(int x, int y) {
 	position_.SetXY(x, y);
 }

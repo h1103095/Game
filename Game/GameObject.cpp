@@ -18,6 +18,10 @@ void GameObject::Start(void) {
 }
 
 void GameObject::Update(const float& delta_time) {
+	
+}
+
+void GameObject::UpdateComponents(const float& delta_time) {
 	for (auto component : components_) {
 		component.second->Update(delta_time);
 	}
@@ -25,6 +29,14 @@ void GameObject::Update(const float& delta_time) {
 
 void GameObject::AddComponent(GameComponent* component) {
 	components_.insert({ component->GetID(), component });
+}
+
+void GameObject::OnCollisionEnter(const Collision& collision) {
+	
+}
+
+void GameObject::OnTriggerEnter(const Collision& collision) {
+
 }
 
 const GameObjectTag GameObject::GetTag(void) const {
