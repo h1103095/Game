@@ -19,22 +19,20 @@ public:
 	virtual ~GameObject(void);
 	virtual void Start(void);
 	virtual void Update(const float& delta_time);
-	virtual void UpdateComponents(const float& delta_time);
-	virtual void AddComponent(GameComponent* component);
-	virtual void OnCollisionEnter(const Collision& collision);
-	virtual void OnTriggerEnter(const Collision& collision);
-	virtual const GameObjectTag GetTag(void) const;
-	virtual GameComponent* GetComponent(ComponentID id);
-	virtual Sprite* GetSprite(void);
-	virtual Transform& GetTransform(void);
-	virtual GameScene& GetGameScene(void);
+	virtual void OnCollisionEnter(Collision& collision);
+	virtual void OnTriggerEnter(Collision& collision);
+	
+	void AddComponent(GameComponent* component);
+	//GameComponent* GetComponent(ComponentID id);
+	void UpdateComponents(const float& delta_time);
+	const GameObjectTag GetTag(void) const;
+	Transform& GetTransform(void);
+	GameScene& GetGameScene(void);
 
 	GameObject* Create(GameScene& scene, Vector2<int> position, Vector2<int> normal);
-
 protected:
 	GameObjectTag tag_;
 	GameScene& scene_;
 	Transform transform_;
-	std::map<ComponentID, GameComponent*> components_;
 	GameObject(GameScene& scene, Vector2<int> position=Vector2<int>::Zero(), Vector2<int> scale=Vector2<int>::Normal());
 };

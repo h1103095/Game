@@ -46,16 +46,16 @@ void GameManager::CreateStraightGround(int num_ground, Vector2<int> position) {
 	if (num_ground == 1) {
 		return;
 	} else {
-		ground.get()->SetBitmap(IDB_GROUND_LEFT);
+		ground.get()->GetComponent<SpriteRenderer>()->SetSprite(Sprite::GetInstance(IDB_GROUND_LEFT));
 	}
 
 	for (; i < num_ground - 1; i++) {
 		ground = CreateGround(position + Vector2<int>(i * 100, 0));
-		ground.get()->SetBitmap(IDB_GROUND_MID);
+		ground.get()->GetComponent<SpriteRenderer>()->SetSprite(Sprite::GetInstance(IDB_GROUND_MID));
 	}
 
 	ground = CreateGround(position + Vector2<int>(i * 100, 0));
-	ground.get()->SetBitmap(IDB_GROUND_RIGHT);
+	ground.get()->GetComponent<SpriteRenderer>()->SetSprite(Sprite::GetInstance(IDB_GROUND_RIGHT));
 }
 
 void GameManager::CreateGroundPattern(GroundPatternID pattern_id) {

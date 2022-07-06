@@ -37,9 +37,6 @@
     <Filter Include="소스 파일\Animators">
       <UniqueIdentifier>{ca597f31-2ec4-4d49-9070-c2d2ede3ebf0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\AnimationStates">
-      <UniqueIdentifier>{df312e47-7726-4d5e-bd84-81d26408027c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Enums">
       <UniqueIdentifier>{1172d6bf-f0ec-4e74-9796-13b03c74030e}</UniqueIdentifier>
     </Filter>
@@ -57,6 +54,18 @@
     </Filter>
     <Filter Include="헤더 파일\Managers">
       <UniqueIdentifier>{fb30213d-de76-4ff3-ba60-63209e3a4a6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\GameObjectComponents">
+      <UniqueIdentifier>{6850d450-e8e4-491e-a024-cee5be19588d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\GameObjectComponents">
+      <UniqueIdentifier>{eb4f53cb-abad-4bef-bede-092d3e703a3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Animations">
+      <UniqueIdentifier>{cb44e32e-438f-4cf8-9de8-7d757cbf11e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Animations">
+      <UniqueIdentifier>{f29ac6d4-314e-43b9-9ef7-5379e841ed6c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,20 +126,8 @@
     <ClInclude Include="ScoreBoard.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="aInGameScene.h">
-      <Filter>헤더 파일\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="StartMenuScene.h">
       <Filter>헤더 파일\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Rigidbody.h">
-      <Filter>헤더 파일\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>헤더 파일\Components</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>헤더 파일\Objects</Filter>
@@ -144,26 +141,11 @@
     <ClInclude Include="Player.h">
       <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>헤더 파일\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>헤더 파일\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Animator.h">
-      <Filter>헤더 파일\Components</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerAnimator.h">
       <Filter>헤더 파일\Animators</Filter>
     </ClInclude>
-    <ClInclude Include="ComponentID.h">
-      <Filter>헤더 파일\Enums</Filter>
-    </ClInclude>
     <ClInclude Include="LayerID.h">
       <Filter>헤더 파일\Enums</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="InGameScene.h">
       <Filter>헤더 파일\Scenes</Filter>
@@ -179,9 +161,6 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>헤더 파일\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="GameComponent.h">
-      <Filter>헤더 파일\Components</Filter>
     </ClInclude>
     <ClInclude Include="IGameObject.h">
       <Filter>헤더 파일\Objects</Filter>
@@ -207,11 +186,47 @@
     <ClInclude Include="Wall.h">
       <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>헤더 파일\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>헤더 파일\GameObjectComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>헤더 파일\GameObjectComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponent.h">
+      <Filter>헤더 파일\GameObjectComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Rigidbody.h">
+      <Filter>헤더 파일\GameObjectComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>헤더 파일\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>헤더 파일\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>헤더 파일\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>헤더 파일\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>헤더 파일\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>헤더 파일\GameObjectComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStateID.h">
+      <Filter>헤더 파일\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerWalkingAnimation.h">
+      <Filter>헤더 파일\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerJumpingAnimation.h">
+      <Filter>헤더 파일\Animations</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -236,18 +251,6 @@
     <ClCompile Include="StartMenuScene.cpp">
       <Filter>소스 파일\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="aInGameScene.cpp">
-      <Filter>소스 파일\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector2.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Rigidbody.cpp">
-      <Filter>소스 파일\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>소스 파일\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
@@ -260,26 +263,11 @@
     <ClCompile Include="Player.cpp">
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>소스 파일\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>소스 파일\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Animator.cpp">
-      <Filter>소스 파일\Components</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerAnimator.cpp">
       <Filter>소스 파일\Animators</Filter>
     </ClCompile>
-    <ClCompile Include="ComponentID.cpp">
-      <Filter>소스 파일\Enums</Filter>
-    </ClCompile>
     <ClCompile Include="LayerID.cpp">
       <Filter>소스 파일\Enums</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="InGameScene.cpp">
       <Filter>소스 파일\Scenes</Filter>
@@ -295,9 +283,6 @@
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>소스 파일\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="GameComponent.cpp">
-      <Filter>소스 파일\Components</Filter>
     </ClCompile>
     <ClCompile Include="IGameObject.cpp">
       <Filter>소스 파일\Objects</Filter>
@@ -323,11 +308,47 @@
     <ClCompile Include="Wall.cpp">
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>소스 파일\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>소스 파일\GameObjectComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>소스 파일\GameObjectComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="GameComponent.cpp">
+      <Filter>소스 파일\GameObjectComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Rigidbody.cpp">
+      <Filter>소스 파일\GameObjectComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>소스 파일\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>소스 파일\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>소스 파일\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>소스 파일\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>소스 파일\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>소스 파일\GameObjectComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStateID.cpp">
+      <Filter>소스 파일\Enums</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerWalkingAnimation.cpp">
+      <Filter>소스 파일\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerJumpingAnimation.cpp">
+      <Filter>소스 파일\Animations</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -385,6 +406,12 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="res\GroundSingle.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\BirdJump1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\BirdJump2.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

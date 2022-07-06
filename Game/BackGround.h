@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-#include "Sprite.h"
+#include "SpriteRenderer.h"
 #include "Rigidbody.h"
 
 class BackGround: public GameObject
@@ -11,7 +11,7 @@ public:
 	virtual void Update(const float& delta_time);
 
 private:
-	Sprite sprite_;
+	SpriteRenderer sprite_renderer_;
 	Rigidbody rigidbody_;
 	const int kWidth;
 	const float kXSpeed = -150.0f;

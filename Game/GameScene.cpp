@@ -32,13 +32,16 @@ void GameScene::DrawGameObjects(CDC* dc) {
 	object_dc.CreateCompatibleDC(dc);
 
 	for (const auto& layer : v_layer) {
-		for (auto& sprite : sprites_[layer]) {
-			object_dc.SelectObject(sprite->GetBitmap().get());
-			Transform& transform = sprite->GetTransform();
-			Vector2<int>& position = transform.GetPosition();
-			Vector2<int>& scale = transform.GetScale();
-			dc->TransparentBlt(position.GetX(), position.GetY(), scale.GetX(), scale.GetY(),
-				&object_dc, 0, 0, scale.GetX(), scale.GetY(), RGB(255, 0, 255));
+		for (auto& sprite_renderer : sprite_renderers_[layer]) {
+			std::shared_ptr<Sprite> sprite = sprite_renderer->GetSprite();
+			if (sprite != nullptr) {
+				object_dc.SelectObject(sprite->GetBitmap());
+				Transform& transform = sprite_renderer->GetTransform();
+				Vector2<int>& scale = sprite->GetScale();
+				Vector2<int>& position = transform.GetPosition();
+				dc->TransparentBlt(position.GetX(), position.GetY(), scale.GetX(), scale.GetY(),
+					&object_dc, 0, 0, scale.GetX(), scale.GetY(), RGB(255, 0, 255));
+			}
 		}
 	}
 
@@ -52,12 +55,12 @@ void GameScene::AddGameObject(std::shared_ptr<IGameObject> game_object) {
 	game_objects_[game_object.get()->GetTag()].push_back(game_object);
 	game_object->Start();
 
-	Sprite* sprite = game_object.get()->GetSprite();
-	if (sprite != nullptr) {
-		sprites_[sprite->GetLayerID()].push_back(sprite);
+	SpriteRenderer* sprite_renderer = game_object.get()->GetComponent<SpriteRenderer>();
+	if (sprite_renderer != nullptr) {
+		sprite_renderers_[sprite_renderer->GetLayerID()].push_back(sprite_renderer);
 	}
 
-	Collider* collider = static_cast<Collider*>(game_object.get()->GetComponent(ComponentID::COLLIDER));
+	Collider* collider = game_object.get()->GetComponent<Collider>();
 	if (collider != nullptr) {
 		game_objects_with_collider_.push_back(game_object);
 	}
@@ -85,16 +88,16 @@ void GameScene::CheckCollisions(void) {
 			auto r_object = game_objects_with_collider_[j].lock();
 
 			CRect collision_area;
-			Collider* l_collider = static_cast<Collider*>(l_object.get()->GetComponent(ComponentID::COLLIDER));
-			Collider* r_collider = static_cast<Collider*>(r_object.get()->GetComponent(ComponentID::COLLIDER));
+			Collider* l_collider = l_object.get()->GetComponent<Collider>();
+			Collider* r_collider = r_object.get()->GetComponent<Collider>();
 			if (CheckCollision(collision_area, l_object, r_object)) {
-				Rigidbody* l_rigidbody = static_cast<Rigidbody*>(l_object.get()->GetComponent(ComponentID::RIGIDBODY));
-				Rigidbody* r_rigidbody = static_cast<Rigidbody*>(r_object.get()->GetComponent(ComponentID::RIGIDBODY));
+				Rigidbody* l_rigidbody = l_object.get()->GetComponent<Rigidbody>();
+				Rigidbody* r_rigidbody = r_object.get()->GetComponent<Rigidbody>();
 
 				Collision l_collision = Collision(r_object, collision_area);
 				Collision r_collision = Collision(l_object, collision_area);
 
-				// 현재 게임 내에 충돌하는 두 오브젝트 모두 rigidbody를 갖는 경우가 존재하지 않음
+				// 현재 게임 내에 충돌하는 두 오브젝트 모두 trigger가 아니면서 rigidbody를 갖는 경우가 존재하지 않음
 				if (!(l_collider->IsTrigger() && r_collider->IsTrigger())) {
 					if (l_rigidbody != nullptr || r_rigidbody != nullptr) {
 						Rigidbody* rigidbody = l_rigidbody;
@@ -128,8 +131,8 @@ void GameScene::CheckCollisions(void) {
 }
 
 const bool GameScene::CheckCollision(CRect& collision_area, std::shared_ptr<IGameObject>& l_object, std::shared_ptr<IGameObject>& r_object) {
-	Collider* l_collider = static_cast<Collider*>(l_object.get()->GetComponent(ComponentID::COLLIDER));
-	Collider* r_collider = static_cast<Collider*>(r_object.get()->GetComponent(ComponentID::COLLIDER));
+	Collider* l_collider = l_object.get()->GetComponent<Collider>();
+	Collider* r_collider = r_object.get()->GetComponent<Collider>();
 
 	assert(l_collider != nullptr && r_collider != nullptr);
 
@@ -167,11 +170,12 @@ void GameScene::OnTimer(UINT_PTR nIDEvent) {
 		const auto& tag = game_object_to_delete.get()->GetTag();
 		auto object_it = find(game_objects_[tag].begin(), game_objects_[tag].end(), game_object_to_delete);
 		// 스프라이트 제거
-		Sprite* sprite = object_it->get()->GetSprite();
-		if (sprite != nullptr) {
-			LayerID layer_id = sprite->GetLayerID();
-			auto sprite_it = find(sprites_[layer_id].begin(), sprites_[layer_id].end(), sprite);
-			sprites_[layer_id].erase(sprite_it);
+		SpriteRenderer* sprite_renderer = object_it->get()->GetComponent<SpriteRenderer>();
+		//SpriteRenderer* sprite_renderer = static_cast<SpriteRenderer*>(object_it->get()->GetComponent(ComponentID::SPRITERENDERER));
+		if (sprite_renderer != nullptr) {
+			LayerID layer_id = sprite_renderer->GetLayerID();
+			auto sprite_renderer_it = find(sprite_renderers_[layer_id].begin(), sprite_renderers_[layer_id].end(), sprite_renderer);
+			sprite_renderers_[layer_id].erase(sprite_renderer_it);
 		}
 
 		// shared_ptr 해제 및 제거

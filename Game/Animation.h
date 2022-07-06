@@ -1,17 +1,22 @@
 #pragma once
+#include <memory>
 #include <vector>
-#include "IGameObject.h"
-#include "GameComponent.h"
 #include "Sprite.h"
 
-class Sprite;
 
-class Animation: public GameComponent
+class Animation
 {
 public:
-	Animation(IGameObject& parent);
-	~Animation(void);
-	void AddSprite(Sprite* sprite);
-private:
-	std::vector<Sprite*> sprites_;
+	Animation(bool loop, float time_interval);
+	//Animation(std::vector<UINT> bitmap_id_vec, bool loop, float time_interval);
+	std::shared_ptr<Sprite> GetNextSprite(void);
+	const float GetTimeInterval(void) const;
+	const bool GetLoop(void) const;
+	void Init(void);
+protected:
+	std::vector<std::shared_ptr<Sprite>> sprites_;
+	bool loop_;
+	float time_interval_;
+	static int cur_idx_;
 };
+

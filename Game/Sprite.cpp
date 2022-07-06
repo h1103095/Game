@@ -2,34 +2,35 @@
 #include "Sprite.h"
 
 
-Sprite::Sprite(IGameObject& parent, int bitmap_id, LayerID layer_id)
-	: GameComponent(parent, ComponentID::SPRITE)
-	, transform_(parent.GetTransform())
-	, kLayerID(layer_id)
+std::map<UINT, std::shared_ptr<Sprite>> Sprite::sprite_map_;
+
+Sprite::Sprite(UINT bitmap_id)
+	: scale_(Vector2<int>::Normal())
+	, image_()
+	, bitmap_id_(bitmap_id)
 {
-	SetBitmap(bitmap_id);
+	image_.LoadBitmap(bitmap_id_);
+	BITMAP bitmap;
+	image_.GetBitmap(&bitmap);
+	scale_.SetXY(static_cast<int>(bitmap.bmWidth), static_cast<int>(bitmap.bmHeight));
 }
 
 Sprite::~Sprite(void) {
 
 }
 
-void Sprite::SetBitmap(int bitmap_id) {
-	image_ = std::make_shared<CBitmap>();
-	image_->LoadBitmap(bitmap_id);
-	BITMAP bitmap;
-	image_->GetBitmap(&bitmap);
-	transform_.SetScale(static_cast<int>(bitmap.bmWidth), static_cast<int>(bitmap.bmHeight));
+std::shared_ptr<Sprite> Sprite::GetInstance(UINT bitmap_id) {
+	auto ret = sprite_map_.insert({ bitmap_id, nullptr });
+	if (ret.second) {
+		ret.first->second = std::make_shared<SpriteStruct>(bitmap_id);
+	}
+	return ret.first->second;
 }
 
-std::shared_ptr<CBitmap> Sprite::GetBitmap(void) {
+CBitmap& Sprite::GetBitmap(void) {
 	return image_;
 }
 
-LayerID Sprite::GetLayerID(void) const {
-	return kLayerID;
-}
-
-Transform& Sprite::GetTransform(void) {
-	return transform_;
+Vector2<int>& Sprite::GetScale(void) {
+	return scale_;
 }

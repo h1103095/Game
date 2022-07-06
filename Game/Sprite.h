@@ -1,24 +1,35 @@
 #pragma once
 #include <memory>
+#include <map>
 #include "Vector2.h"
-#include "GameComponent.h"
 #include "LayerID.h"
-#include "Transform.h"
+#include "resource.h"
 
-class Transform;
 
-class Sprite: public GameComponent {
+class Sprite {
 
 public:
-	Sprite(IGameObject& parent, int bitmap_id, LayerID layer_id);
+	//Sprite(UINT bitmap_id);
+	static std::shared_ptr<Sprite> GetInstance(UINT bitmap_id);
 	virtual ~Sprite(void);
-	void SetBitmap(int bitmap_id);
-	std::shared_ptr<CBitmap> GetBitmap(void);
-	LayerID GetLayerID(void) const;
-	Transform& GetTransform(void);
+	CBitmap& GetBitmap(void);
+	Vector2<int>& GetScale(void);
+
 private:
-	const LayerID kLayerID;
-	Transform& transform_;
-	std::shared_ptr<CBitmap> image_ = nullptr;
+	const UINT bitmap_id_;
+	Vector2<int> scale_;
+	CBitmap image_;
+	static std::map<UINT, std::shared_ptr<Sprite>> sprite_map_;
+
+protected:
+	Sprite(UINT bitmap_id);
 };
 
+
+struct SpriteStruct : public Sprite {
+	SpriteStruct(UINT bitmap_id)
+		: Sprite(bitmap_id)
+	{
+
+	}
+};

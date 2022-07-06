@@ -10,7 +10,7 @@
 #include "GameScene.h"
 #include "IGameObject.h"
 #include "IGameObjectFactory.h"
-#include "Sprite.h"
+#include "SpriteRenderer.h"
 #include "Collider.h"
 #include "Rigidbody.h"
 #include "LayerID.h"
@@ -52,7 +52,7 @@ protected:
 	std::vector<std::shared_ptr<IGameObject>> game_objects_to_delete_;
 	std::vector<std::shared_ptr<IGameObject>> game_objects_to_add_;
 	std::vector<std::weak_ptr<IGameObject>> game_objects_with_collider_;
-	std::map<LayerID, std::vector<Sprite*>> sprites_;
+	std::map<LayerID, std::vector<SpriteRenderer*>> sprite_renderers_;
 	const int kTimerCycle = 15;
 	InputManager input_manager_;
 };

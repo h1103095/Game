@@ -8,6 +8,7 @@ public:
 	virtual ~Wall(void);
 
 private:
-	Sprite sprite_;
+	SpriteRenderer sprite_renderer_;
+	//static Sprite kWallSprite_;
 };
 

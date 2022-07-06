@@ -1,11 +1,14 @@
 #include "stdafx.h"
 #include "BackGround.h"
 
+//Sprite BackGround::background_sprite_(IDB_BACKGROUND);
+
+
 BackGround::BackGround(GameScene& game_scene, Vector2<int> position, Vector2<int> scale)
 	: GameObject(game_scene, position, scale)
-	, sprite_(*this, IDB_BACKGROUND, LayerID::BACKGROUND)
+	, sprite_renderer_(*this, Sprite::GetInstance(IDB_BACKGROUND), LayerID::BACKGROUND)
 	, rigidbody_(*this, false)
-	, kWidth(transform_.GetScale().GetX())
+	, kWidth(2400)
 {
 	rigidbody_.AddForce(kXSpeed, 0.0f);
 }
@@ -21,3 +24,5 @@ void BackGround::Update(const float& delta_time)
 		transform_.Translate(kWidth * 2, 0);
 	}
 }
+
+//Sprite BackGround::background_sprite_(IDB_BACKGROUND);

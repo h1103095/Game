@@ -3,7 +3,7 @@
 
 
 Rigidbody::Rigidbody(IGameObject& parent, bool use_gravity)
-	: GameComponent(parent, ComponentID::RIGIDBODY)
+	: GameComponent(parent)
 	, transform_(parent.GetTransform())
 	, speed_(Vector2<float>::Zero())
 	, use_gravity_(use_gravity)

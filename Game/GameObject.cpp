@@ -23,34 +23,30 @@ void GameObject::Update(const float& delta_time) {
 
 void GameObject::UpdateComponents(const float& delta_time) {
 	for (auto component : components_) {
-		component.second->Update(delta_time);
+		component->Update(delta_time);
 	}
 }
 
 void GameObject::AddComponent(GameComponent* component) {
-	components_.insert({ component->GetID(), component });
+	components_.push_back(component);
 }
 
-void GameObject::OnCollisionEnter(const Collision& collision) {
+void GameObject::OnCollisionEnter(Collision& collision) {
 	
 }
 
-void GameObject::OnTriggerEnter(const Collision& collision) {
+void GameObject::OnTriggerEnter(Collision& collision) {
 
 }
 
 const GameObjectTag GameObject::GetTag(void) const {
 	return tag_;
 }
-
-GameComponent* GameObject::GetComponent(ComponentID id) {
-	std::map<ComponentID, GameComponent*>::iterator i = components_.find(id);
-	return (i == components_.end()) ? nullptr : i->second;
-}
-
-Sprite* GameObject::GetSprite(void) {
-	return static_cast<Sprite*>(GetComponent(ComponentID::SPRITE));
-}
+//
+//GameComponent* GameObject::GetComponent(ComponentID id) {
+//	std::map<ComponentID, GameComponent*>::iterator i = components_.find(id);
+//	return (i == components_.end()) ? nullptr : i->second;
+//}
 
 Transform& GameObject::GetTransform(void){
 	return transform_;

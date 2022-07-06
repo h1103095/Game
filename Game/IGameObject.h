@@ -1,14 +1,12 @@
 #pragma once
 #include <memory>
 #include "Vector2.h"
-#include "ComponentID.h"
 #include "GameObjectTag.h"
 #include "InputManager.h"
 
 class GameComponent;
 class GameScene;
 class Transform;
-class Sprite;
 class Collider;
 class Collision;
 
@@ -20,11 +18,24 @@ public:
 	virtual void Update(const float& delta_time) = 0;
 	virtual void UpdateComponents(const float& delta_time) = 0;
 	virtual void AddComponent(GameComponent* component) = 0;
-	virtual void OnCollisionEnter(const Collision& collision) = 0;
-	virtual void OnTriggerEnter(const Collision& collision) = 0;
+	virtual void OnCollisionEnter(Collision& collision) = 0;
+	virtual void OnTriggerEnter(Collision& collision) = 0;
 	virtual const GameObjectTag GetTag(void) const = 0;
-	virtual GameComponent* GetComponent(ComponentID id) = 0;
-	virtual Sprite* GetSprite(void) = 0;
+	//virtual GameComponent* GetComponent(ComponentID id) = 0;
 	virtual Transform& GetTransform(void) = 0;
 	virtual GameScene& GetGameScene(void) = 0;
+
+	template<typename T>
+	T* GetComponent() {
+		for(GameComponent* component: components_) {
+			T* casted_component = dynamic_cast<T*>(component);
+			if (casted_component != nullptr) {
+				return casted_component;
+			}
+		}
+		return nullptr;
+	}
+
+protected:
+	std::vector<GameComponent*> components_;
 };

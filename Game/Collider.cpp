@@ -3,7 +3,7 @@
 
 
 Collider::Collider(IGameObject& parent, Vector2<int> position, Vector2<int> scale, bool is_trigger)
-	: GameComponent(parent, ComponentID::COLLIDER)
+	: GameComponent(parent)
 	, position_(position)
 	, parent_pos_(parent_.GetTransform().GetPosition())
 	, rect_()

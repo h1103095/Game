@@ -17,7 +17,6 @@ public:
 	void CreateGroundPattern(GroundPatternID pattern_id);
 
 private:
-	//GameScene& scene_;
 	static bool instantiated_;
 	GameObjectFactory<Ground> ground_factory_;
 	ULONGLONG last_spawn_time_;
