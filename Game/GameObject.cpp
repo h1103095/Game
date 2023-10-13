@@ -42,11 +42,6 @@ void GameObject::OnTriggerEnter(Collision& collision) {
 const GameObjectTag GameObject::GetTag(void) const {
 	return tag_;
 }
-//
-//GameComponent* GameObject::GetComponent(ComponentID id) {
-//	std::map<ComponentID, GameComponent*>::iterator i = components_.find(id);
-//	return (i == components_.end()) ? nullptr : i->second;
-//}
 
 Transform& GameObject::GetTransform(void){
 	return transform_;

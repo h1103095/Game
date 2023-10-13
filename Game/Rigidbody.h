@@ -21,6 +21,6 @@ private:
 	Transform& transform_;
 	Vector2<float> speed_;
 	bool use_gravity_;
-	const float kGravity_ = 12.0f; // 9.8fº¸´Ù ºü¸£°Ô
+	const float kGravity_ = 12.0f; // 9.8fë³´ë‹¤ ë¹ ë¥´ê²Œ
 };
 

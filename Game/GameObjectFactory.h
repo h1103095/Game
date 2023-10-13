@@ -4,6 +4,7 @@
 #include "Ground.h"
 #include "Player.h"
 #include "Wall.h"
+#include "Coin.h"
 
 class GameScene;
 
@@ -21,5 +22,6 @@ public:
 
 template class GameObjectFactory<BackGround>;
 template class GameObjectFactory<Ground>;
+template class GameObjectFactory<Coin>;
 template class GameObjectFactory<Player>;
 template class GameObjectFactory<Wall>;

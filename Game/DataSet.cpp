@@ -40,10 +40,10 @@ bool CDataSet::Open(void)
 	strPath = strPath.Left(index + 1);
 
 	CString dbFilePath;
-	dbFilePath.Format(_T("%sScoreDB.mdb"), strPath);
+	dbFilePath.Format(_T("%sScoreDB.mdb"), strPath.GetString());
 
 	CString strConnect;
-	strConnect.Format(_T("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=%s"), dbFilePath);
+	strConnect.Format(_T("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=%s"), dbFilePath.GetString());
 
 	hr = db.OpenFromInitializationString(strConnect);
 	if(FAILED(hr))
@@ -72,16 +72,17 @@ bool CDataSet::Open(void)
 
 bool CDataSet::Query(CString strQuery, DbCommand* pDbCommand)
 {
-	if(!m_bOpenSession)
+	if (!m_bOpenSession)
 	{
 		return false;
 	}
 
 	CDBPropSet propset(DBPROPSET_ROWSET);
-	propset.AddProperty(DBPROP_IRowsetChange, true);
-	propset.AddProperty(DBPROP_UPDATABILITY, DBPROPVAL_UP_CHANGE |
-		DBPROPVAL_UP_INSERT | DBPROPVAL_UP_DELETE);
-	propset.AddProperty(DBPROP_CANSCROLLBACKWARDS, true);
+	if (!(propset.AddProperty(DBPROP_IRowsetChange, true) &&\
+		propset.AddProperty(DBPROP_UPDATABILITY, DBPROPVAL_UP_CHANGE | DBPROPVAL_UP_INSERT | DBPROPVAL_UP_DELETE) &&\
+		propset.AddProperty(DBPROP_CANSCROLLBACKWARDS, true))) {
+		return false;
+	}
 
 	HRESULT hr = pDbCommand->Open(m_dbSession, strQuery, &propset);
 	if(FAILED(hr))

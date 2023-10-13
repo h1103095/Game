@@ -21,7 +21,6 @@ public:
 	virtual void OnCollisionEnter(Collision& collision) = 0;
 	virtual void OnTriggerEnter(Collision& collision) = 0;
 	virtual const GameObjectTag GetTag(void) const = 0;
-	//virtual GameComponent* GetComponent(ComponentID id) = 0;
 	virtual Transform& GetTransform(void) = 0;
 	virtual GameScene& GetGameScene(void) = 0;
 

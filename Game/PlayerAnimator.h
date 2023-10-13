@@ -32,5 +32,5 @@ private:
 };
 
 
-// ¿©±â¿¡ animation ÂüÁ¶ °´Ã¼¸¦ ³õ°í update½Ã ÇØ´ç ¾Ö´Ï¸ÞÀÌ¼ÇÀ» ½ÇÇà
-// spriteÃ³·³ ¿©±â¿¡ staticÀ¸·Î ¾Ö´Ï¸ÞÀÌ¼ÇµéÀ» µî·ÏÇØ ³õ±â
+// ì—¬ê¸°ì— animation ì°¸ì¡° ê°ì²´ë¥¼ ë†“ê³  updateì‹œ í•´ë‹¹ ì• ë‹ˆë©”ì´ì…˜ì„ ì‹¤í–‰
+// spriteì²˜ëŸ¼ ì—¬ê¸°ì— staticìœ¼ë¡œ ì• ë‹ˆë©”ì´ì…˜ë“¤ì„ ë“±ë¡í•´ ë†“ê¸°

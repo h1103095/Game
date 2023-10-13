@@ -23,7 +23,6 @@ public:
 	virtual void OnTriggerEnter(Collision& collision);
 	
 	void AddComponent(GameComponent* component);
-	//GameComponent* GetComponent(ComponentID id);
 	void UpdateComponents(const float& delta_time);
 	const GameObjectTag GetTag(void) const;
 	Transform& GetTransform(void);

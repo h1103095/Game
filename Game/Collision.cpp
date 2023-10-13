@@ -4,6 +4,7 @@
 Collision::Collision(std::shared_ptr<IGameObject> game_object, CRect collision_area)
 	: game_object_(game_object)
 	, collision_area_(collision_area)
+	, tag_(game_object->GetTag())
 {
 
 }

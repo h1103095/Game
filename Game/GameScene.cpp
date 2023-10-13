@@ -27,7 +27,7 @@ InputManager& GameScene::GetInputManager(void) {
 }
 
 void GameScene::DrawGameObjects(CDC* dc) {
-	// layerID ¼øÀ¸·Î sprite¸¦ ±×¸²
+	// layerID ìˆœìœ¼ë¡œ spriteë¥¼ ê·¸ë¦¼
 	CDC object_dc;
 	object_dc.CreateCompatibleDC(dc);
 
@@ -49,9 +49,9 @@ void GameScene::DrawGameObjects(CDC* dc) {
 }
 
 void GameScene::AddGameObject(std::shared_ptr<IGameObject> game_object) {
-	// vector¿¡ ¿ÀºêÁ§Æ® Æ÷ÀÎÅÍ¸¦ Ãß°¡
-	// GameObjectÀÇ Start ÇÔ¼ö È£Ãâ
-	// ¿ÀºêÁ§Æ®µé·ÎºÎÅÍ sprite¸¦ ¹Ş¾Æ¿È. layerID·Î Á¤·Ä
+	// vectorì— ì˜¤ë¸Œì íŠ¸ í¬ì¸í„°ë¥¼ ì¶”ê°€
+	// GameObjectì˜ Start í•¨ìˆ˜ í˜¸ì¶œ
+	// ì˜¤ë¸Œì íŠ¸ë“¤ë¡œë¶€í„° spriteë¥¼ ë°›ì•„ì˜´. layerIDë¡œ ì •ë ¬
 	game_objects_[game_object.get()->GetTag()].push_back(game_object);
 	game_object->Start();
 
@@ -79,9 +79,9 @@ void GameScene::Destroy(std::shared_ptr<IGameObject> game_object) {
 }
 
 void GameScene::CheckCollisions(void) {
-	// ÇÃ·¹ÀÌ¾î¿Í ¹ßÆÇÀÇ Ãæµ¹À» Ã³¸®
-	// ÇÃ·¹ÀÌ¾î¿Í ÀûÀÇ Ãæµ¹À» Ã³¸®
-	// ÃÑ¾Ë°ú ÀûÀÇ Ãæµ¹À» Ã³¸®
+	// í”Œë ˆì´ì–´ì™€ ë°œíŒì˜ ì¶©ëŒì„ ì²˜ë¦¬
+	// í”Œë ˆì´ì–´ì™€ ì ì˜ ì¶©ëŒì„ ì²˜ë¦¬
+	// ì´ì•Œê³¼ ì ì˜ ì¶©ëŒì„ ì²˜ë¦¬
 	for (int i = 0; i < game_objects_with_collider_.size(); i++) {
 		auto l_object = game_objects_with_collider_[i].lock();
 		for (int j = i + 1; j < game_objects_with_collider_.size(); j++) {
@@ -97,7 +97,7 @@ void GameScene::CheckCollisions(void) {
 				Collision l_collision = Collision(r_object, collision_area);
 				Collision r_collision = Collision(l_object, collision_area);
 
-				// ÇöÀç °ÔÀÓ ³»¿¡ Ãæµ¹ÇÏ´Â µÎ ¿ÀºêÁ§Æ® ¸ğµÎ trigger°¡ ¾Æ´Ï¸é¼­ rigidbody¸¦ °®´Â °æ¿ì°¡ Á¸ÀçÇÏÁö ¾ÊÀ½
+				// í˜„ì¬ ê²Œì„ ë‚´ì— ì¶©ëŒí•˜ëŠ” ë‘ ì˜¤ë¸Œì íŠ¸ ëª¨ë‘ triggerê°€ ì•„ë‹ˆë©´ì„œ rigidbodyë¥¼ ê°–ëŠ” ê²½ìš°ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŒ
 				if (!(l_collider->IsTrigger() && r_collider->IsTrigger())) {
 					if (l_rigidbody != nullptr || r_rigidbody != nullptr) {
 						Rigidbody* rigidbody = l_rigidbody;
@@ -113,8 +113,8 @@ void GameScene::CheckCollisions(void) {
 
 					}
 					else {
-						// µÑ ´Ù rigidbody¸¦ °®´Â °æ¿ì´Â °ÔÀÓ ³»¿¡ ¾ø°í
-						// µÑ ´Ù rigidbody°¡ ¾øÀ¸¸é Ãß°¡ Ã³¸® x
+						// ë‘˜ ë‹¤ rigidbodyë¥¼ ê°–ëŠ” ê²½ìš°ëŠ” ê²Œì„ ë‚´ì— ì—†ê³ 
+						// ë‘˜ ë‹¤ rigidbodyê°€ ì—†ìœ¼ë©´ ì¶”ê°€ ì²˜ë¦¬ x
 					}
 
 					l_object.get()->OnCollisionEnter(l_collision);
@@ -151,10 +151,10 @@ void GameScene::OnTimer(UINT_PTR nIDEvent) {
 	float delta_time = (cur_time - prev_time) * 0.001f;
 	prev_time = cur_time;
 
-	// ÀÔ·Â °Ë»ç
+	// ì…ë ¥ ê²€ì‚¬
 	input_manager_.Update();
 
-	// ¿ÀºêÁ§Æ®µéÀ» ¾÷µ¥ÀÌÆ®
+	// ì˜¤ë¸Œì íŠ¸ë“¤ì„ ì—…ë°ì´íŠ¸
 	int object_idx = 0;
 	for (const auto& tag : v_tag) {
 		for (auto& game_object : game_objects_[tag]) {
@@ -165,11 +165,11 @@ void GameScene::OnTimer(UINT_PTR nIDEvent) {
 
 	CheckCollisions();
 
-	// Á¦°Å Ç®¿¡ ÀÖ´Â ¿ÀºêÁ§Æ® Á¦°Å
+	// ì œê±° í’€ì— ìˆëŠ” ì˜¤ë¸Œì íŠ¸ ì œê±°
 	for (auto& game_object_to_delete : game_objects_to_delete_) {
 		const auto& tag = game_object_to_delete.get()->GetTag();
 		auto object_it = find(game_objects_[tag].begin(), game_objects_[tag].end(), game_object_to_delete);
-		// ½ºÇÁ¶óÀÌÆ® Á¦°Å
+		// ìŠ¤í”„ë¼ì´íŠ¸ ì œê±°
 		SpriteRenderer* sprite_renderer = object_it->get()->GetComponent<SpriteRenderer>();
 		//SpriteRenderer* sprite_renderer = static_cast<SpriteRenderer*>(object_it->get()->GetComponent(ComponentID::SPRITERENDERER));
 		if (sprite_renderer != nullptr) {
@@ -178,15 +178,15 @@ void GameScene::OnTimer(UINT_PTR nIDEvent) {
 			sprite_renderers_[layer_id].erase(sprite_renderer_it);
 		}
 
-		// shared_ptr ÇØÁ¦ ¹× Á¦°Å
+		// shared_ptr í•´ì œ ë° ì œê±°
 		object_it->reset();
 		game_objects_[tag].erase(object_it);
 		game_object_to_delete.reset();
 	}
-	// Á¦°Å Ç® ºñ¿ì±â
+	// ì œê±° í’€ ë¹„ìš°ê¸°
 	std::vector<std::shared_ptr<IGameObject>>().swap(game_objects_to_delete_);
 
-	// collider pool¿¡ ÀÖ´Â °ÔÀÓ ¿ÀºêÁ§Æ® weak_ptr Á¦°Å
+	// collider poolì— ìˆëŠ” ê²Œì„ ì˜¤ë¸Œì íŠ¸ weak_ptr ì œê±°
 	for (int i = 0; i < game_objects_with_collider_.size(); i++) {
 		std::shared_ptr<IGameObject> object_with_collider = game_objects_with_collider_[i].lock();
 		if (!object_with_collider) {
@@ -195,14 +195,14 @@ void GameScene::OnTimer(UINT_PTR nIDEvent) {
 		}
 	}
 
-	// È­¸é ±×¸®±â
+	// í™”ë©´ ê·¸ë¦¬ê¸°
 	Invalidate();
 
-	// »ı¼º Ç®¿¡ ÀÖ´Â ¿ÀºêÁ§Æ® Ãß°¡
+	// ìƒì„± í’€ì— ìˆëŠ” ì˜¤ë¸Œì íŠ¸ ì¶”ê°€
 	for (auto& game_object_to_add : game_objects_to_add_) {
 		AddGameObject(game_object_to_add);
 	}
-	// »ı¼º Ç® ºñ¿ì±â
+	// ìƒì„± í’€ ë¹„ìš°ê¸°
 	std::vector<std::shared_ptr<IGameObject>>().swap(game_objects_to_add_);
 }
 
@@ -215,7 +215,7 @@ void GameScene::OnDraw(CDC* dc) {
 	CDC buffer_dc;
 	buffer_dc.CreateCompatibleDC(dc);
 
-	// ´õºí ¹öÆÛ¸µ
+	// ë”ë¸” ë²„í¼ë§
 	CBitmap bitmap;
 	CBitmap* old_bitmap;
 	bitmap.CreateCompatibleBitmap(dc, WND_X, WND_Y);
@@ -223,10 +223,10 @@ void GameScene::OnDraw(CDC* dc) {
 
 	buffer_dc.PatBlt(0, 0, WND_X, WND_Y, BLACKNESS);
 
-	// ¿ÀºêÁ§Æ® ±×¸®±â
+	// ì˜¤ë¸Œì íŠ¸ ê·¸ë¦¬ê¸°
 	DrawGameObjects(&buffer_dc);
 
-	// ´õºí ¹öÆÛ¸µ
+	// ë”ë¸” ë²„í¼ë§
 	dc->BitBlt(0, 0, WND_X, WND_Y, &buffer_dc, 0, 0, SRCCOPY);
 	buffer_dc.SelectObject(old_bitmap);
 	buffer_dc.DeleteDC();

@@ -5,6 +5,7 @@ bool GameManager::instantiated_ = false;
 
 GameManager::GameManager(GameScene& game_scene)
 	: GameObject(game_scene)
+	, remain_ground_length_(100)
 	, last_spawn_time_(GetTickCount64() - 500)
 	, time_between_spawn_(7000ULL)
 	, cur_ground_height_(600)
@@ -21,27 +22,49 @@ GameManager::~GameManager(void) {
 }
 
 void GameManager::Update(const float& delta_time) {
-	if (GetTickCount64() > last_spawn_time_ + time_between_spawn_) {
-		last_spawn_time_ = GetTickCount64();
+	// Ground 이동
+	remain_ground_length_ -= static_cast<int>(delta_time * -kGroundSpeed);
+#ifdef DEBUG
+	TRACE("Remain ground length: %d\n", remain_ground_length_);
+#endif
 
+	// Ground 생성
+	if (remain_ground_length_ < 100) {
 		GroundPatternID pattern = v_ground_pattern_id[rand() % v_ground_pattern_id.size()];
 		CreateGroundPattern(pattern);
+		TRACE("Ground pattern id: %d\n", pattern);
+	}
+
+	if (GetTickCount64() > last_spawn_time_ + time_between_spawn_) {
+		last_spawn_time_ = GetTickCount64();
+		// 총알 생성
+		
 #ifdef DEBUG
-		TRACE("last spawn time: %u\t\t pattern id: %d\n", last_spawn_time_, pattern);
+		// TRACE("last spawn time: %u\t\t pattern id: %d\n", last_spawn_time_, pattern);
 #endif
 	}
 }
 
 std::shared_ptr<Ground> GameManager::CreateGround(Vector2<int> position) {
-	return std::static_pointer_cast<Ground>(scene_.Instantiate(ground_factory_, position));
+	std::shared_ptr<Ground> ground = std::static_pointer_cast<Ground>(scene_.Instantiate(ground_factory_, position));
+	ground->SetSpeed(kGroundSpeed);
+	return ground;
 }
 
-void GameManager::CreateStraightGround(int num_ground, Vector2<int> position) {
+std::shared_ptr<Coin> GameManager::CreateCoin(Vector2<int> position)
+{
+	std::shared_ptr<Coin> coin = std::static_pointer_cast<Coin>(scene_.Instantiate(coin_factory_, position));
+	coin->SetSpeed(kGroundSpeed);
+	return coin;
+}
+
+void GameManager::CreateStraightGround(int num_ground, Vector2<int> position, int interval) {
 	assert(num_ground >= 1);
 
 	std::shared_ptr<Ground> ground;
 	int i = 1;
 
+	// 왼쪽 Ground sprite
 	ground = CreateGround(position);
 	if (num_ground == 1) {
 		return;
@@ -49,16 +72,31 @@ void GameManager::CreateStraightGround(int num_ground, Vector2<int> position) {
 		ground.get()->GetComponent<SpriteRenderer>()->SetSprite(Sprite::GetInstance(IDB_GROUND_LEFT));
 	}
 
+	// 가운데 Ground sprite
 	for (; i < num_ground - 1; i++) {
-		ground = CreateGround(position + Vector2<int>(i * 100, 0));
+		ground = CreateGround(position + Vector2<int>(i * interval, 0));
 		ground.get()->GetComponent<SpriteRenderer>()->SetSprite(Sprite::GetInstance(IDB_GROUND_MID));
 	}
 
-	ground = CreateGround(position + Vector2<int>(i * 100, 0));
+	// 오른쪽 Ground sprite
+	ground = CreateGround(position + Vector2<int>(i * interval, 0));
 	ground.get()->GetComponent<SpriteRenderer>()->SetSprite(Sprite::GetInstance(IDB_GROUND_RIGHT));
 }
 
+void GameManager::CreateStraightCoin(int num_ground, Vector2<int> position, int interval) {
+	assert(num_ground >= 1);
+
+	std::shared_ptr<Coin> coin;
+
+	for (int i=0; i < num_ground; i++) {
+		coin = CreateCoin(position + Vector2<int>(i * interval, 0));
+
+	}
+}
+
 void GameManager::CreateGroundPattern(GroundPatternID pattern_id) {
+	int start_x_pos = WND_X + remain_ground_length_;
+	int new_ground_length = 0;
 
 	if (ground_in_high_pos_) {
 		if (rand() % 3 == 0) {
@@ -69,50 +107,86 @@ void GameManager::CreateGroundPattern(GroundPatternID pattern_id) {
 
 	switch (pattern_id) {
 	case GroundPatternID::STRAIGHT:
-		CreateStraightGround(11, Vector2<int>(WND_X, cur_ground_height_));
+		//   ㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+		// ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
+		CreateStraightGround(11, Vector2<int>(start_x_pos, cur_ground_height_));
+		CreateStraightCoin(9, Vector2<int>(start_x_pos + 100, cur_ground_height_ - 100));
+		new_ground_length = 1200;
 		break;
 	case GroundPatternID::HOLE:
-		CreateStraightGround(4, Vector2<int>(WND_X, cur_ground_height_));
-		CreateStraightGround(4, Vector2<int>(WND_X + 700, cur_ground_height_));
+		//           ㅇ
+		//         ㅇ  ㅇ
+		//        ㅇ    ㅇ
+		// ㅁㅁㅁㅁ      ㅁㅁㅁㅁ
+		CreateStraightGround(4, Vector2<int>(start_x_pos, cur_ground_height_));
+		CreateStraightGround(4, Vector2<int>(start_x_pos + 700, cur_ground_height_));
+		CreateStraightCoin(2, Vector2<int>(start_x_pos + 350, cur_ground_height_ - 100), 300);
+		CreateStraightCoin(2, Vector2<int>(start_x_pos + 400, cur_ground_height_ - 200), 200);
+		CreateStraightCoin(1, Vector2<int>(start_x_pos + 500, cur_ground_height_ - 300));
+		new_ground_length = 1100;
 		break;
 	case GroundPatternID::HOLES_EASY1:
-		CreateStraightGround(4, Vector2<int>(WND_X, cur_ground_height_));
-		CreateStraightGround(1, Vector2<int>(WND_X + 550, cur_ground_height_));
-		CreateStraightGround(4, Vector2<int>(WND_X + 700, cur_ground_height_));
+		//        ㅇㅇ  ㅇㅇ
+		//        
+		// ㅁㅁㅁㅁ   ㅁ   ㅁㅁㅁㅁ
+		CreateStraightGround(3, Vector2<int>(start_x_pos, cur_ground_height_));
+		CreateStraightGround(1, Vector2<int>(start_x_pos + 550, cur_ground_height_));
+		CreateStraightGround(3, Vector2<int>(start_x_pos + 800, cur_ground_height_));
+		CreateStraightCoin(2, Vector2<int>(start_x_pos + 400, cur_ground_height_ - 200), 125);
+		CreateStraightCoin(2, Vector2<int>(start_x_pos + 650, cur_ground_height_ - 200), 125);
+		new_ground_length = 1100;
 		break;
 	case GroundPatternID::HOLES_EASY2:
-		CreateStraightGround(1, Vector2<int>(WND_X, cur_ground_height_));
-		CreateStraightGround(1, Vector2<int>(WND_X + 300, cur_ground_height_));
-		CreateStraightGround(1, Vector2<int>(WND_X + 600, cur_ground_height_));
-		CreateStraightGround(2, Vector2<int>(WND_X + 900, cur_ground_height_));
+		//   ㅇㅇ  ㅇㅇ  ㅇㅇ
+		//   
+		// ㅁ    ㅁ    ㅁ    ㅁ
+		CreateStraightGround(4, Vector2<int>(start_x_pos, cur_ground_height_), 300);
+		CreateStraightCoin(2, Vector2<int>(start_x_pos + 100, cur_ground_height_ - 200));
+		CreateStraightCoin(2, Vector2<int>(start_x_pos + 400, cur_ground_height_ - 200));
+		CreateStraightCoin(2, Vector2<int>(start_x_pos + 700, cur_ground_height_ - 200));
+		new_ground_length = 1300;
 		break;
 	case GroundPatternID::HOLES_HARD1:
-		CreateStraightGround(1, Vector2<int>(WND_X, cur_ground_height_));
-		CreateStraightGround(1, Vector2<int>(WND_X + 500, cur_ground_height_));
-		CreateStraightGround(1, Vector2<int>(WND_X + 1000, cur_ground_height_));
+		//
+		// ㅁ        ㅁ        ㅁ  
+		CreateStraightGround(1, Vector2<int>(start_x_pos, cur_ground_height_));
+		CreateStraightGround(1, Vector2<int>(start_x_pos + 500, cur_ground_height_));
+		CreateStraightGround(1, Vector2<int>(start_x_pos + 1000, cur_ground_height_));
+		new_ground_length = 1100;
 		break;
 	case GroundPatternID::HOLES_HARD2:
-		CreateStraightGround(1, Vector2<int>(WND_X, cur_ground_height_));
-		CreateStraightGround(1, Vector2<int>(WND_X + 400, cur_ground_height_ - 100));
-		CreateStraightGround(1, Vector2<int>(WND_X + 800, cur_ground_height_ - 200));
-		CreateStraightGround(1, Vector2<int>(WND_X + 1000, cur_ground_height_));
+		//
+		//
+		CreateStraightGround(1, Vector2<int>(start_x_pos, cur_ground_height_));
+		CreateStraightGround(1, Vector2<int>(start_x_pos + 400, cur_ground_height_ - 100));
+		CreateStraightGround(1, Vector2<int>(start_x_pos + 800, cur_ground_height_ - 200));
+		CreateStraightGround(1, Vector2<int>(start_x_pos + 1000, cur_ground_height_));
+		new_ground_length = 1100;
 		break;
 	case GroundPatternID::STAIRS:
 		if (!ground_in_high_pos_) {
-			CreateStraightGround(3, Vector2<int>(WND_X, cur_ground_height_));
-			CreateStraightGround(3, Vector2<int>(WND_X + 400, cur_ground_height_ - 150));
-			CreateStraightGround(3, Vector2<int>(WND_X + 800, cur_ground_height_ - 300));
+			//                 ㅁㅁ
+			//         ㅁㅁ
+			// ㅁㅁ
+			CreateStraightGround(2, Vector2<int>(start_x_pos, cur_ground_height_));
+			CreateStraightGround(2, Vector2<int>(start_x_pos + 400, cur_ground_height_ - 150));
+			CreateStraightGround(2, Vector2<int>(start_x_pos + 800, cur_ground_height_ - 300));
 			cur_ground_height_ -= 300;
+			new_ground_length = 1000;
 		}
 		else {
-			CreateStraightGround(3, Vector2<int>(WND_X, cur_ground_height_));
-			CreateStraightGround(3, Vector2<int>(WND_X + 400, cur_ground_height_ + 150));
-			CreateStraightGround(3, Vector2<int>(WND_X + 800, cur_ground_height_ + 300));
+			// ㅁㅁ
+			//         
+			//             ㅁㅁ
+			CreateStraightGround(2, Vector2<int>(start_x_pos, cur_ground_height_));
+			CreateStraightGround(2, Vector2<int>(start_x_pos + 600, cur_ground_height_ + 300));
 			cur_ground_height_ += 300;
+			new_ground_length = 800;
 		}
 		ground_in_high_pos_ = !ground_in_high_pos_;
 		break;
 	}
+	remain_ground_length_ += new_ground_length;
 
 	/*
 	static DWORD dwTime = GetTickCount();

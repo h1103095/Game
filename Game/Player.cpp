@@ -26,10 +26,14 @@ void Player::Update(const float& delta_time) {
 }
 
 void Player::OnCollisionEnter(Collision& collision) {
-	if (!is_on_ground_ && collision.GetGameObject()->GetTag() == GameObjectTag::GROUND) {
+	std::shared_ptr<IGameObject> object = collision.GetGameObject();
+	if (!is_on_ground_ && object->GetTag() == GameObjectTag::GROUND) {
 		is_on_ground_ = true;
 		jump_cnt_ = 0;
 		animator_.SetAnimationByPlayerStateID(PlayerStateID::WALKING);
+	}
+	if (object->GetTag() == GameObjectTag::COIN) {
+		scene_.Destroy(object);
 	}
 }
 
