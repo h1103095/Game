@@ -229,6 +229,9 @@
     <ClInclude Include="PlayerJumpingAnimation.h">
       <Filter>헤더 파일\Animations</Filter>
     </ClInclude>
+    <ClInclude Include="BodyType.h">
+      <Filter>헤더 파일\Enums</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -350,6 +353,9 @@
     </ClCompile>
     <ClCompile Include="PlayerJumpingAnimation.cpp">
       <Filter>소스 파일\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="BodyType.cpp">
+      <Filter>소스 파일\Enums</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

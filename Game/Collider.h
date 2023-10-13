@@ -12,7 +12,7 @@ public:
 	virtual ~Collider(void);
 	virtual void Update(const float& delta_time);
 	bool IsTrigger(void);
-	CRect& GetRect(void);
+	CRect GetRect(void);
 
 private:
 	Vector2<int> position_;

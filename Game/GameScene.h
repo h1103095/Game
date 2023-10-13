@@ -51,6 +51,7 @@ protected:
 	std::map<GameObjectTag, std::vector<std::shared_ptr<IGameObject>>> game_objects_;
 	std::vector<std::shared_ptr<IGameObject>> game_objects_to_delete_;
 	std::vector<std::shared_ptr<IGameObject>> game_objects_to_add_;
+	std::vector<std::weak_ptr<IGameObject>> game_objects_with_Rigidbody_;
 	std::vector<std::weak_ptr<IGameObject>> game_objects_with_collider_;
 	std::map<LayerID, std::vector<SpriteRenderer*>> sprite_renderers_;
 	const int kTimerCycle = 15;

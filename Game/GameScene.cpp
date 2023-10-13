@@ -60,9 +60,14 @@ void GameScene::AddGameObject(std::shared_ptr<IGameObject> game_object) {
 		sprite_renderers_[sprite_renderer->GetLayerID()].push_back(sprite_renderer);
 	}
 
-	Collider* collider = game_object.get()->GetComponent<Collider>();
-	if (collider != nullptr) {
+	// Collider을 가진 객체 모아두기
+	if (game_object.get()->GetComponent<Collider>() != nullptr) {
 		game_objects_with_collider_.push_back(game_object);
+	}
+
+	// Rigidbody를 가진 객체 모아두기
+	if (game_object.get()->GetComponent<Rigidbody>() != nullptr) {
+		game_objects_with_Rigidbody_.push_back(game_object);
 	}
 }
 
@@ -79,44 +84,26 @@ void GameScene::Destroy(std::shared_ptr<IGameObject> game_object) {
 }
 
 void GameScene::CheckCollisions(void) {
-	// 플레이어와 발판의 충돌을 처리
-	// 플레이어와 적의 충돌을 처리
-	// 총알과 적의 충돌을 처리
-	for (int i = 0; i < game_objects_with_collider_.size(); i++) {
-		auto l_object = game_objects_with_collider_[i].lock();
+	for (int i = 0; i < game_objects_with_Rigidbody_.size(); i++) {
+		auto l_object = game_objects_with_Rigidbody_[i].lock();
+		Collider* l_collider = l_object.get()->GetComponent<Collider>();
+		if (l_collider == nullptr) {
+			continue;
+		}
 		for (int j = i + 1; j < game_objects_with_collider_.size(); j++) {
 			auto r_object = game_objects_with_collider_[j].lock();
+			if (l_object == r_object) {
+				continue;
+			}
 
 			CRect collision_area;
-			Collider* l_collider = l_object.get()->GetComponent<Collider>();
 			Collider* r_collider = r_object.get()->GetComponent<Collider>();
 			if (CheckCollision(collision_area, l_object, r_object)) {
-				Rigidbody* l_rigidbody = l_object.get()->GetComponent<Rigidbody>();
-				Rigidbody* r_rigidbody = r_object.get()->GetComponent<Rigidbody>();
-
 				Collision l_collision = Collision(r_object, collision_area);
 				Collision r_collision = Collision(l_object, collision_area);
 
-				// 현재 게임 내에 충돌하는 두 오브젝트 모두 trigger가 아니면서 rigidbody를 갖는 경우가 존재하지 않음
+				// 둘 다 trigger가 아닌 경우
 				if (!(l_collider->IsTrigger() && r_collider->IsTrigger())) {
-					if (l_rigidbody != nullptr || r_rigidbody != nullptr) {
-						Rigidbody* rigidbody = l_rigidbody;
-						if (l_rigidbody == nullptr) {
-							rigidbody = r_rigidbody;
-						}
-
-						float height = static_cast<float>(collision_area.Height());
-						float width = static_cast<float>(collision_area.Width());
-
-						rigidbody->GetTransform().Translate(0, -collision_area.Height());
-						rigidbody->ResetForce();
-
-					}
-					else {
-						// 둘 다 rigidbody를 갖는 경우는 게임 내에 없고
-						// 둘 다 rigidbody가 없으면 추가 처리 x
-					}
-
 					l_object.get()->OnCollisionEnter(l_collision);
 					r_object.get()->OnCollisionEnter(r_collision);
 				}
@@ -163,15 +150,15 @@ void GameScene::OnTimer(UINT_PTR nIDEvent) {
 		}
 	}
 
+	// 충돌 검사
 	CheckCollisions();
-
+	
 	// 제거 풀에 있는 오브젝트 제거
 	for (auto& game_object_to_delete : game_objects_to_delete_) {
 		const auto& tag = game_object_to_delete.get()->GetTag();
 		auto object_it = find(game_objects_[tag].begin(), game_objects_[tag].end(), game_object_to_delete);
 		// 스프라이트 제거
 		SpriteRenderer* sprite_renderer = object_it->get()->GetComponent<SpriteRenderer>();
-		//SpriteRenderer* sprite_renderer = static_cast<SpriteRenderer*>(object_it->get()->GetComponent(ComponentID::SPRITERENDERER));
 		if (sprite_renderer != nullptr) {
 			LayerID layer_id = sprite_renderer->GetLayerID();
 			auto sprite_renderer_it = find(sprite_renderers_[layer_id].begin(), sprite_renderers_[layer_id].end(), sprite_renderer);

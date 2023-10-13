@@ -1,6 +1,3 @@
-// ScoreBoard.cpp : 구현 파일입니다.
-//
-
 #include "stdafx.h"
 #include "Game.h"
 #include "ScoreBoard.h"
@@ -8,8 +5,6 @@
 #include "MainFrm.h"
 #include "InGameScene.h"
 
-
-// CScoreBoard 대화 상자입니다.
 
 IMPLEMENT_DYNAMIC(CScoreBoard, CDialogEx)
 
@@ -40,8 +35,6 @@ BEGIN_MESSAGE_MAP(CScoreBoard, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// CScoreBoard 메시지 처리기입니다.
-
 
 void CScoreBoard::OnClickedButtonEnroll()
 {
@@ -54,14 +47,14 @@ void CScoreBoard::OnClickedButtonEnroll()
 	{
 		if(m_dbSet.Query(strQuery, &m_command))
 		{
-			AfxMessageBox(_T("등록되었습니다."));
+			AfxMessageBox(_T("?源낆쨯??뤿???щ빍??"));
 			(GetDlgItem(IDC_BUTTON_ENROLL))->EnableWindow(FALSE);
-			UpdateScoreBoard();	// 스코어보드 업데이트
+			UpdateScoreBoard();
 		}
 	}
 	else
 	{
-		MessageBox(_T("유저명을 입력해 주세요."), _T("잠깐"), MB_OK);
+		MessageBox(_T("?醫?筌뤿굞????낆젾??雅뚯눘苑??"), _T("?醫됲돵"), MB_OK);
 	}
 }
 
@@ -80,7 +73,7 @@ void CScoreBoard::UpdateScoreBoard(void)
 	int nCount = 0;
 
 	CString strQuery;
-	strQuery.Format(_T("SELECT * FROM scoreboard ORDER BY score DESC")); // 점수를 기준으로 내림차순 하여 불러오기
+	strQuery.Format(_T("SELECT * FROM scoreboard ORDER BY score DESC"));
 	m_command.Close();
 
 	int i = 0;

@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include "GameObjectFactory.h"
 #include "GroundPatternID.h"
-
+#include "Vector2.h"
 
 class GameManager: public GameObject
 {
@@ -27,6 +27,8 @@ private:
 	int remain_ground_length_;
 	int cur_ground_height_;
 	bool ground_in_high_pos_;
-	const int kNumInitGrounds = 13;
+	const int kNumInitGrounds = 12;
 	const float kGroundSpeed = -300.0f;
+	const Vector2<int> kGroundScale = Vector2<int>(100, 100);
+	const Vector2<int> kCoinScale = Vector2<int>(100, 100);
 };

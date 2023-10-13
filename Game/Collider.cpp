@@ -28,7 +28,7 @@ bool Collider::IsTrigger(void) {
 	return is_trigger_;
 }
 
-CRect& Collider::GetRect(void) {
+CRect Collider::GetRect(void) {
 	rect_.MoveToXY(position_.GetX() + parent_pos_.GetX(), position_.GetY() + parent_pos_.GetY());
 	return rect_;
 }

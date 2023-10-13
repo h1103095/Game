@@ -2,11 +2,11 @@
 #include "Rigidbody.h"
 
 
-Rigidbody::Rigidbody(IGameObject& parent, bool use_gravity)
+Rigidbody::Rigidbody(IGameObject& parent, BodyType body_type)
 	: GameComponent(parent)
 	, transform_(parent.GetTransform())
 	, speed_(Vector2<float>::Zero())
-	, use_gravity_(use_gravity)
+	, body_type_(body_type)
 {
 }
 
@@ -29,16 +29,20 @@ void Rigidbody::ResetForce(void) {
 }
 
 void Rigidbody::Update(const float& delta_time) {
-	if (use_gravity_) {
+	if (body_type_ == BodyType::DYNAMIC) {
 		AddForce(0.0f, kGravity_);
 	}
 	transform_.Translate(speed_ * delta_time);
 }
 
-Transform& Rigidbody::GetTransform(void) {
+Transform Rigidbody::GetTransform(void) {
 	return transform_;
 }
 
 Vector2<float> Rigidbody::GetSpeed(void) {
 	return speed_;
+}
+
+BodyType Rigidbody::GetBodyType(void) {
+	return body_type_;
 }

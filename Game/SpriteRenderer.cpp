@@ -27,6 +27,6 @@ const LayerID SpriteRenderer::GetLayerID(void) const {
 	return kLayerID;
 }
 
-Transform& SpriteRenderer::GetTransform(void) {
+Transform SpriteRenderer::GetTransform(void) {
 	return transform_;
 }

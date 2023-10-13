@@ -12,7 +12,6 @@ public:
 
 private:
 	SpriteRenderer sprite_renderer_;
-	Rigidbody rigidbody_;
 	const int kWidth;
 	const float kXSpeed = -200.0f;
 };

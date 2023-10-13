@@ -5,8 +5,8 @@ enum class LayerID
 {
 	DEFAULT,
 	BACKGROUND,
-	WALL,
 	GROUND,
+	WALL,
 	PLAYER,
 };
 
@@ -14,7 +14,7 @@ enum class LayerID
 static const std::vector<LayerID> v_layer{
 	LayerID::DEFAULT,
 	LayerID::BACKGROUND,
-	LayerID::WALL,
 	LayerID::GROUND,
+	LayerID::WALL,
 	LayerID::PLAYER,
 };

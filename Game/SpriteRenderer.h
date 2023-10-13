@@ -12,7 +12,7 @@ public:
 	virtual ~SpriteRenderer(void);
 	void SetSprite(std::shared_ptr<Sprite> sprite);
 	std::shared_ptr<Sprite> GetSprite(void);
-	Transform& GetTransform(void);
+	Transform GetTransform(void);
 	const LayerID GetLayerID(void) const;
 
 private:

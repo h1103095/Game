@@ -33,13 +33,11 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 	cs.x = 10;
 	cs.y = 20;
 
-	cs.cx = WND_X;				// 媛濡??ш린
-	cs.cy = WND_Y;				// ?몃줈 ?ш린
+	cs.cx = WND_X;
+	cs.cy = WND_Y;
 
 	return TRUE;
 }
-
-// CMainFrame 횁첩쨈횥
 
 #ifdef _DEBUG
 void CMainFrame::AssertValid() const
@@ -57,7 +55,7 @@ void CMainFrame::Dump(CDumpContext& dc) const
 
 void CMainFrame::SwitchView(SceneID id)
 {
-    CView* old_view = GetActiveView();			// ?꾩옱 酉?
+    CView* old_view = GetActiveView();
 	CView* new_view;
 	switch (id) {
 	case SceneID::MENU:
