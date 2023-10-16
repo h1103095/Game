@@ -2,7 +2,7 @@
 #include "Player.h"
 
 
-Player::Player(GameScene& game_scene, Vector2<int> position, Vector2<int> scale)
+Player::Player(IGameScene& game_scene, Vector2<int> position, Vector2<int> scale)
 	: GameObject(game_scene, position, scale)
 	, sprite_renderer_(*this, nullptr, LayerID::PLAYER)
 	, animator_(*this, sprite_renderer_)
@@ -22,6 +22,9 @@ Player::~Player(void)
 void Player::Update(const float& delta_time) {
 	if (scene_.GetInputManager().GetKeyDown(Key::SPACE)) {
 		Jump();
+	}
+	if (scene_.GetInputManager().GetKeyDown(Key::LBUTTON)) {
+		//scene_.Instantiate();
 	}
 }
 

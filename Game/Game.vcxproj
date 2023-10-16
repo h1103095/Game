@@ -90,6 +90,7 @@
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>Default</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <ConformanceMode>false</ConformanceMode>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -115,6 +116,7 @@
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>Default</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <ConformanceMode>false</ConformanceMode>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -141,6 +143,7 @@
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>Default</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <ConformanceMode>false</ConformanceMode>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -170,6 +173,7 @@
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>Default</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <ConformanceMode>false</ConformanceMode>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -189,7 +193,6 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include=".editorconfig" />
     <None Include="ReadMe.txt" />
     <None Include="res\BackGround.bmp" />
     <None Include="res\Bean.bmp" />
@@ -218,11 +221,10 @@
     <ClInclude Include="GameDoc.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="GameObjectTag.h" />
     <ClInclude Include="GroundPatternID.h" />
-    <ClInclude Include="IGameObjectFactory.h" />
     <ClInclude Include="IGameObject.h" />
+    <ClInclude Include="IGameScene.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="LayerID.h" />
     <ClInclude Include="InGameScene.h" />
@@ -263,11 +265,10 @@
     <ClCompile Include="GameDoc.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="GameObjectTag.cpp" />
     <ClCompile Include="GroundPatternID.cpp" />
-    <ClCompile Include="IGameObjectFactory.cpp" />
     <ClCompile Include="IGameObject.cpp" />
+    <ClCompile Include="IGameScene.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="LayerID.cpp" />
     <ClCompile Include="InGameScene.cpp" />

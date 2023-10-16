@@ -3,13 +3,13 @@
 #include "Vector2.h"
 
 class IGameObject;
-class GameScene;
+class IGameScene;
 
 class IGameObjectFactory
 {
 public:
-	virtual std::shared_ptr<IGameObject> FactoryMethod(GameScene& scene, Vector2<int> position, Vector2<int> scale) = 0;
+	virtual std::shared_ptr<IGameObject> FactoryMethod(const CString& classname, IGameScene& scene, Vector2<int> position, Vector2<int> scale);
 
-	std::shared_ptr<IGameObject> Create(GameScene& scene, Vector2<int> position=Vector2<int>::Zero(), Vector2<int> scale=Vector2<int>::Normal());
+	std::shared_ptr<IGameObject> Instantiate(const CString& classname, IGameScene& scene, Vector2<int> position=Vector2<int>::Zero(), Vector2<int> scale=Vector2<int>::Normal());
 	
 };

@@ -5,11 +5,13 @@
 #include "Rigidbody.h"
 #include "Sprite.h"
 #include "Game.h"
+#include "SpriteRenderer.h"
+#include "Collider.h"
 
 class Coin: public GameObject
 {
 public:
-	Coin(GameScene& game_scene, Vector2<int> position, Vector2<int> scale);
+	Coin(IGameScene& game_scene, Vector2<int> position, Vector2<int> scale);
 	virtual ~Coin(void);
 	virtual void Update(const float& delta_time);
 	void SetSpeed(float speed);

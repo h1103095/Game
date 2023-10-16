@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GameObject.h"
 
-GameObject::GameObject(GameScene& scene, Vector2<int> position, Vector2<int> scale)
+GameObject::GameObject(IGameScene& scene, Vector2<int> position, Vector2<int> scale)
 	: tag_(GameObjectTag::DEFAULT)
 	, scene_(scene)
 	, transform_(Transform(position, scale))
@@ -47,10 +47,10 @@ Transform& GameObject::GetTransform(void){
 	return transform_;
 }
 
-GameScene& GameObject::GetGameScene(void) {
+IGameScene& GameObject::GetGameScene(void) {
 	return scene_;
 }
 
-GameObject* GameObject::Create(GameScene& scene, Vector2<int> position, Vector2<int> scale) {
+GameObject* GameObject::Create(IGameScene& scene, Vector2<int> position, Vector2<int> scale) {
 	return new GameObject(scene, position, scale);
 }

@@ -18,25 +18,20 @@ void InputManager::Update(void) {
 	prev_down_keys_ = down_keys_;
 	down_keys_ = 0;
 	up_keys_ = 0;
-	if (GetKeyState(VK_SPACE) & 0x8000) {
-		KeyDown(VK_SPACE);
+
+	for (auto const& pair : key_map) {
+		if (GetKeyState(pair.first) & 0x8000) {
+			KeyDown(pair.second);
+		}
 	}
 }
 
-void InputManager::KeyDown(UINT key) {
-	switch (key) {
-	case VK_SPACE:
-		down_keys_ |= static_cast<int>(Key::SPACE);
-		break;
-	}
+void InputManager::KeyDown(Key key) {
+	down_keys_ |= static_cast<int>(key);
 }
 
-void InputManager::KeyUp(UINT key) {
-	switch (key) {
-	case VK_SPACE:
-		up_keys_ |= static_cast<int>(Key::SPACE);
-		break;
-	}
+void InputManager::KeyUp(Key key) {
+	up_keys_ |= static_cast<int>(key);
 }
 
 bool InputManager::GetKeyDown(Key key) {

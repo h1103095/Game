@@ -5,7 +5,7 @@
 #include "InputManager.h"
 
 class GameComponent;
-class GameScene;
+class IGameScene;
 class Transform;
 class Collider;
 class Collision;
@@ -22,7 +22,7 @@ public:
 	virtual void OnTriggerEnter(Collision& collision) = 0;
 	virtual const GameObjectTag GetTag(void) const = 0;
 	virtual Transform& GetTransform(void) = 0;
-	virtual GameScene& GetGameScene(void) = 0;
+	virtual IGameScene& GetGameScene(void) = 0;
 
 	template<typename T>
 	T* GetComponent() {

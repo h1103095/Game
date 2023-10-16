@@ -2,9 +2,7 @@
 #include "Ground.h"
 
 
-//Sprite Ground::kGroundSingleSprite_(IDB_GROUND_SINGLE);
-
-Ground::Ground(GameScene& game_scene, Vector2<int> position, Vector2<int> scale)
+Ground::Ground(IGameScene& game_scene, Vector2<int> position, Vector2<int> scale)
 	: GameObject(game_scene, position, scale)
 	, sprite_renderer_(*this, Sprite::GetInstance(IDB_GROUND_SINGLE), LayerID::GROUND)
 	, collider_(*this, Vector2<int>::Zero(), Vector2<int>(100, 10), false)

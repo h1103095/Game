@@ -3,7 +3,7 @@
 
 bool GameManager::instantiated_ = false;
 
-GameManager::GameManager(GameScene& game_scene)
+GameManager::GameManager(IGameScene& game_scene)
 	: GameObject(game_scene)
 	, remain_ground_length_(200)
 	, last_spawn_time_(GetTickCount64() - 500)
@@ -34,7 +34,7 @@ void GameManager::Update(const float& delta_time) {
 
 	if (GetTickCount64() > last_spawn_time_ + time_between_spawn_) {
 		last_spawn_time_ = GetTickCount64();
-		// 총알 생성
+		// 적 생성 코드 추가하기
 		
 #ifdef DEBUG
 		// TRACE("last spawn time: %u\t\t pattern id: %d\n", last_spawn_time_, pattern);
@@ -43,14 +43,14 @@ void GameManager::Update(const float& delta_time) {
 }
 
 std::shared_ptr<Ground> GameManager::CreateGround(Vector2<int> position) {
-	std::shared_ptr<Ground> ground = std::static_pointer_cast<Ground>(scene_.Instantiate(ground_factory_, position, kGroundScale));
+	std::shared_ptr<Ground> ground = std::static_pointer_cast<Ground>(scene_.Instantiate(_T("Ground"), position, kGroundScale));
 	ground->SetSpeed(kGroundSpeed);
 	return ground;
 }
 
 std::shared_ptr<Coin> GameManager::CreateCoin(Vector2<int> position)
 {
-	std::shared_ptr<Coin> coin = std::static_pointer_cast<Coin>(scene_.Instantiate(coin_factory_, position, kCoinScale));
+	std::shared_ptr<Coin> coin = std::static_pointer_cast<Coin>(scene_.Instantiate(_T("Coin"), position, kCoinScale));
 	coin->SetSpeed(kGroundSpeed);
 	return coin;
 }
@@ -146,7 +146,7 @@ void GameManager::CreateGroundPattern(GroundPatternID pattern_id) {
 		break;
 	case GroundPatternID::HOLES_EASY2:
 		//     ㅇㅇ    ㅇㅇ    ㅇㅇ
-		//   
+		//
 		// ㅁㅁ    ㅁㅁ    ㅁㅁ    ㅁㅁ
 		CreateStraightGround(2, Vector2<int>(start_x_pos, cur_ground_height_));
 		CreateStraightGround(2, Vector2<int>(start_x_pos + 400, cur_ground_height_));
@@ -196,7 +196,6 @@ void GameManager::CreateGroundPattern(GroundPatternID pattern_id) {
 			new_ground_length = 1200;
 		}
 		else {
-			  
 			//       ㅇx3
 			//     ㅇ     ㅇ
 			//             ㅇ

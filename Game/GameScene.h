@@ -1,15 +1,13 @@
 #pragma once
 #include <vector>
 #include <memory>
-#include <map>
 #include <cassert>
 
 #include "afxwin.h"
 #include "Game.h"
 #include "GameDoc.h"
-#include "GameScene.h"
+#include "IGameScene.h"
 #include "IGameObject.h"
-#include "IGameObjectFactory.h"
 #include "SpriteRenderer.h"
 #include "Collider.h"
 #include "Rigidbody.h"
@@ -17,24 +15,44 @@
 #include "GameObjectTag.h"
 #include "Collision.h"
 #include "InputManager.h"
+#include "GameObjectFactory.h"
+#include "BackGround.h"
+#include "Ground.h"
+#include "Coin.h"
+#include "Player.h"
+#include "Wall.h"
+#include "Bullet.h"
 
 
-class GameScene : public CView {
+template<typename T> std::shared_ptr<IGameObject> CreateInstance(IGameScene& scene, Vector2<int> position, Vector2<int> scale) { return std::make_shared<T>(scene, position, scale); };
+
+typedef std::map<CString, std::shared_ptr<IGameObject>(*)(IGameScene& scene, Vector2<int> position, Vector2<int> scale)> constructor_map_type;
+
+static const constructor_map_type constructor_map = {
+	std::make_pair(_T("BackGround"), &CreateInstance<BackGround>),
+	std::make_pair(_T("Ground"), &CreateInstance<Ground>),
+	std::make_pair(_T("Coin"), &CreateInstance<Coin>),
+	std::make_pair(_T("Player"), &CreateInstance<Player>),
+	std::make_pair(_T("Wall"), &CreateInstance<Wall>),
+	std::make_pair(_T("Bullet"), &CreateInstance<Bullet>),
+};
+
+
+class GameScene : public IGameScene {
 	DECLARE_DYNCREATE(GameScene);
 
 public:
 	GameScene(void);
 	virtual ~GameScene(void);
-	InputManager& GetInputManager(void);
-	void DrawGameObjects(CDC* dc);
-	void AddGameObject(std::shared_ptr<IGameObject> game_object);
-	std::shared_ptr<IGameObject> Instantiate(IGameObjectFactory& factory, Vector2<int> position = Vector2<int>::Zero(), Vector2<int> scale = Vector2<int>::Normal());
-	void Destroy(std::shared_ptr<IGameObject> game_object);
-	void CheckCollisions(void);
-	const bool CheckCollision(CRect& collision_area, std::shared_ptr<IGameObject>& l_object, std::shared_ptr<IGameObject>& r_object);
-
-	afx_msg void OnTimer(UINT_PTR nIDEvent);
-	afx_msg void OnDestroy();
+	virtual InputManager& GetInputManager(void);
+	virtual void DrawGameObjects(CDC* dc);
+	virtual void AddGameObject(std::shared_ptr<IGameObject> game_object);
+	virtual void Destroy(std::shared_ptr<IGameObject> game_object);
+	virtual void CheckCollisions(void);
+	virtual const bool CheckCollision(CRect& collision_area, std::shared_ptr<IGameObject>& l_object, std::shared_ptr<IGameObject>& r_object);
+	virtual std::shared_ptr<IGameObject> Instantiate(CString const& classname, Vector2<int> position, Vector2<int> scale = Vector2<int>::Normal());
+	virtual afx_msg void OnTimer(UINT_PTR nIDEvent);
+	virtual afx_msg void OnDestroy();
 
 	virtual void OnDraw(CDC* dc);
 	virtual void OnInitialUpdate();

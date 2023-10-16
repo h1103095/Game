@@ -2,7 +2,7 @@
 #include "BackGround.h"
 
 
-BackGround::BackGround(GameScene& game_scene, Vector2<int> position, Vector2<int> scale)
+BackGround::BackGround(IGameScene& game_scene, Vector2<int> position, Vector2<int> scale)
 	: GameObject(game_scene, position, scale)
 	, sprite_renderer_(*this, Sprite::GetInstance(IDB_BACKGROUND), LayerID::BACKGROUND)
 	, kWidth(2400)

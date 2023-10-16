@@ -7,11 +7,11 @@
 #include "Vector2.h"
 #include "Transform.h"
 #include "GameComponent.h"
-#include "GameScene.h"
+#include "IGameScene.h"
+#include "Collision.h"
 
 class Transform;
 class GameComponent;
-class GameScene;
 
 class GameObject: public IGameObject
 {
@@ -26,12 +26,12 @@ public:
 	void UpdateComponents(const float& delta_time);
 	const GameObjectTag GetTag(void) const;
 	Transform& GetTransform(void);
-	GameScene& GetGameScene(void);
+	IGameScene& GetGameScene(void);
 
-	GameObject* Create(GameScene& scene, Vector2<int> position, Vector2<int> normal);
+	GameObject* Create(IGameScene& scene, Vector2<int> position, Vector2<int> normal);
 protected:
 	GameObjectTag tag_;
-	GameScene& scene_;
+	IGameScene& scene_;
 	Transform transform_;
-	GameObject(GameScene& scene, Vector2<int> position=Vector2<int>::Zero(), Vector2<int> scale=Vector2<int>::Normal());
+	GameObject(IGameScene& scene, Vector2<int> position=Vector2<int>::Zero(), Vector2<int> scale=Vector2<int>::Normal());
 };

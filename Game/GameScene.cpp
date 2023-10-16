@@ -71,12 +71,19 @@ void GameScene::AddGameObject(std::shared_ptr<IGameObject> game_object) {
 	}
 }
 
-std::shared_ptr<IGameObject> GameScene::Instantiate(IGameObjectFactory& factory, Vector2<int> position, Vector2<int> scale)
-{
-	std::shared_ptr<IGameObject> game_object = factory.Create(*this, position, scale);
-
-	game_objects_to_add_.push_back(game_object);
-	return game_object;
+std::shared_ptr<IGameObject> GameScene::Instantiate(CString const& classname, Vector2<int> position, Vector2<int> scale) {
+	auto item = constructor_map.find(classname);
+	if (item != constructor_map.end()) {
+		std::shared_ptr<IGameObject> game_object = item->second(*this, position, scale);
+		game_objects_to_add_.push_back(game_object);
+		return game_object;
+	}
+	else {
+#ifdef DEBUG
+		TRACE(L"%s 생성 실패\n", classname);
+#endif
+		AfxThrowInvalidArgException();
+	}
 }
 
 void GameScene::Destroy(std::shared_ptr<IGameObject> game_object) {

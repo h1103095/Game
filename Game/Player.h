@@ -3,12 +3,12 @@
 #include "SpriteRenderer.h"
 #include "PlayerAnimator.h"
 #include "Rigidbody.h"
-
+#include "Collider.h"
 
 class Player: public GameObject
 {
 public:
-	Player(GameScene& game_scene, Vector2<int> position, Vector2<int> scale);
+	Player(IGameScene& game_scene, Vector2<int> position, Vector2<int> scale);
 	virtual ~Player(void);
 	virtual void Update(const float& delta_time);
 	virtual void OnCollisionEnter(Collision& collision);

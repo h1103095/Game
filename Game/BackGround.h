@@ -6,7 +6,7 @@
 class BackGround: public GameObject
 {
 public:
-	BackGround(GameScene& scene, Vector2<int> position, Vector2<int> scale);
+	BackGround(IGameScene& scene, Vector2<int> position, Vector2<int> scale);
 	virtual ~BackGround(void);
 	virtual void Update(const float& delta_time);
 

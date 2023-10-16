@@ -47,14 +47,14 @@ void CScoreBoard::OnClickedButtonEnroll()
 	{
 		if(m_dbSet.Query(strQuery, &m_command))
 		{
-			AfxMessageBox(_T("?源낆쨯??뤿???щ빍??"));
+			AfxMessageBox(_T("등록되었습니다."));
 			(GetDlgItem(IDC_BUTTON_ENROLL))->EnableWindow(FALSE);
 			UpdateScoreBoard();
 		}
 	}
 	else
 	{
-		MessageBox(_T("?醫?筌뤿굞????낆젾??雅뚯눘苑??"), _T("?醫됲돵"), MB_OK);
+		MessageBox(_T("유저명을 입력해 주세요."), _T("잠깐"), MB_OK);
 	}
 }
 
