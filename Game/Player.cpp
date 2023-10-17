@@ -24,7 +24,11 @@ void Player::Update(const float& delta_time) {
 		Jump();
 	}
 	if (scene_.GetInputManager().GetKeyDown(Key::LBUTTON)) {
-		//scene_.Instantiate();
+		std::shared_ptr<IGameObject> bullet = scene_.Instantiate(_T("Bullet"), transform_.GetPosition());
+		// 마우스 지점과 플레이어 위치로 각도 계산
+
+		// 총알 속도를 사용하여 x축 속도와 y축 속도 계산
+		// bullet->GetComponent<Rigidbody>()->SetForce();
 	}
 }
 

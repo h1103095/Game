@@ -66,8 +66,9 @@ void GameScene::AddGameObject(std::shared_ptr<IGameObject> game_object) {
 	}
 
 	// Rigidbody를 가진 객체 모아두기
-	if (game_object.get()->GetComponent<Rigidbody>() != nullptr) {
-		game_objects_with_Rigidbody_.push_back(game_object);
+	Rigidbody* rigidbody = game_object.get()->GetComponent<Rigidbody>();
+	if (rigidbody != nullptr && rigidbody->GetBodyType() == BodyType::DYNAMIC) {
+		game_objects_with_rigidbody_.push_back(game_object);
 	}
 }
 
@@ -91,8 +92,8 @@ void GameScene::Destroy(std::shared_ptr<IGameObject> game_object) {
 }
 
 void GameScene::CheckCollisions(void) {
-	for (int i = 0; i < game_objects_with_Rigidbody_.size(); i++) {
-		auto l_object = game_objects_with_Rigidbody_[i].lock();
+	for (int i = 0; i < game_objects_with_rigidbody_.size(); i++) {
+		auto l_object = game_objects_with_rigidbody_[i].lock();
 		Collider* l_collider = l_object.get()->GetComponent<Collider>();
 		if (l_collider == nullptr) {
 			continue;
@@ -140,7 +141,6 @@ void GameScene::OnTimer(UINT_PTR nIDEvent) {
 	CView::OnTimer(nIDEvent);
 
 	static ULONGLONG prev_time = GetTickCount64();
-
 	ULONGLONG cur_time = GetTickCount64();
 	float delta_time = (cur_time - prev_time) * 0.001f;
 	prev_time = cur_time;
@@ -160,7 +160,7 @@ void GameScene::OnTimer(UINT_PTR nIDEvent) {
 	// 충돌 검사
 	CheckCollisions();
 	
-	// 제거 풀에 있는 오브젝트 제거
+	// 제거할 오브젝트 목록
 	for (auto& game_object_to_delete : game_objects_to_delete_) {
 		const auto& tag = game_object_to_delete.get()->GetTag();
 		auto object_it = find(game_objects_[tag].begin(), game_objects_[tag].end(), game_object_to_delete);
@@ -177,10 +177,10 @@ void GameScene::OnTimer(UINT_PTR nIDEvent) {
 		game_objects_[tag].erase(object_it);
 		game_object_to_delete.reset();
 	}
-	// 제거 풀 비우기
+	// 제거할 오브젝트 목록 비우기
 	std::vector<std::shared_ptr<IGameObject>>().swap(game_objects_to_delete_);
 
-	// collider pool에 있는 게임 오브젝트 weak_ptr 제거
+	// collider가 있는 게임 오브젝트 weak_ptr 제거
 	for (int i = 0; i < game_objects_with_collider_.size(); i++) {
 		std::shared_ptr<IGameObject> object_with_collider = game_objects_with_collider_[i].lock();
 		if (!object_with_collider) {
@@ -189,15 +189,15 @@ void GameScene::OnTimer(UINT_PTR nIDEvent) {
 		}
 	}
 
-	// 화면 그리기
-	Invalidate();
-
-	// 생성 풀에 있는 오브젝트 추가
+	// 생성 목록에 있는 오브젝트 추가
 	for (auto& game_object_to_add : game_objects_to_add_) {
 		AddGameObject(game_object_to_add);
 	}
-	// 생성 풀 비우기
+	// 생성 목록 비우기
 	std::vector<std::shared_ptr<IGameObject>>().swap(game_objects_to_add_);
+
+	// 화면 그리기
+	Invalidate();
 }
 
 void GameScene::OnDestroy() {
@@ -205,14 +205,14 @@ void GameScene::OnDestroy() {
 	KillTimer(0);
 }
 
-void GameScene::OnDraw(CDC* dc) {
+void GameScene::OnDraw(CDC* pDC) {
 	CDC buffer_dc;
-	buffer_dc.CreateCompatibleDC(dc);
+	buffer_dc.CreateCompatibleDC(pDC);
 
 	// 더블 버퍼링
 	CBitmap bitmap;
 	CBitmap* old_bitmap;
-	bitmap.CreateCompatibleBitmap(dc, WND_X, WND_Y);
+	bitmap.CreateCompatibleBitmap(pDC, WND_X, WND_Y);
 	old_bitmap = buffer_dc.SelectObject(&bitmap);
 
 	buffer_dc.PatBlt(0, 0, WND_X, WND_Y, BLACKNESS);
@@ -221,7 +221,7 @@ void GameScene::OnDraw(CDC* dc) {
 	DrawGameObjects(&buffer_dc);
 
 	// 더블 버퍼링
-	dc->BitBlt(0, 0, WND_X, WND_Y, &buffer_dc, 0, 0, SRCCOPY);
+	pDC->BitBlt(0, 0, WND_X, WND_Y, &buffer_dc, 0, 0, SRCCOPY);
 	buffer_dc.SelectObject(old_bitmap);
 	buffer_dc.DeleteDC();
 	bitmap.DeleteObject();

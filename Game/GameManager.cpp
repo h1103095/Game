@@ -42,23 +42,23 @@ void GameManager::Update(const float& delta_time) {
 	}
 }
 
-std::shared_ptr<Ground> GameManager::CreateGround(Vector2<int> position) {
-	std::shared_ptr<Ground> ground = std::static_pointer_cast<Ground>(scene_.Instantiate(_T("Ground"), position, kGroundScale));
-	ground->SetSpeed(kGroundSpeed);
+std::shared_ptr<IGameObject> GameManager::CreateGround(Vector2<int> position) {
+	std::shared_ptr<IGameObject> ground = std::static_pointer_cast<IGameObject>(scene_.Instantiate(_T("Ground"), position, kGroundScale));
+	ground->GetComponent<Rigidbody>()->SetForce(kGroundSpeed, 0.f);
 	return ground;
 }
 
-std::shared_ptr<Coin> GameManager::CreateCoin(Vector2<int> position)
+std::shared_ptr<IGameObject> GameManager::CreateCoin(Vector2<int> position)
 {
-	std::shared_ptr<Coin> coin = std::static_pointer_cast<Coin>(scene_.Instantiate(_T("Coin"), position, kCoinScale));
-	coin->SetSpeed(kGroundSpeed);
+	std::shared_ptr<IGameObject> coin = std::static_pointer_cast<IGameObject>(scene_.Instantiate(_T("Coin"), position, kCoinScale));
+	coin->GetComponent<Rigidbody>()->SetForce(kGroundSpeed, 0.f);
 	return coin;
 }
 
 void GameManager::CreateStraightGround(int num_ground, Vector2<int> position, int interval) {
 	assert(num_ground >= 1);
 
-	std::shared_ptr<Ground> ground;
+	std::shared_ptr<IGameObject> ground;
 
 	if (num_ground == 1) {
 		ground = CreateGround(position);
@@ -92,7 +92,7 @@ void GameManager::CreateStraightGround(int num_ground, Vector2<int> position, in
 void GameManager::CreateStraightCoin(int num_ground, Vector2<int> position, int interval) {
 	assert(num_ground >= 1);
 
-	std::shared_ptr<Coin> coin;
+	std::shared_ptr<IGameObject> coin;
 
 	for (int i=0; i < num_ground; i++) {
 		coin = CreateCoin(position + Vector2<int>(i * interval, 0));

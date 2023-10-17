@@ -2,6 +2,8 @@
 #include "atltypes.h"
 #include "GameObject.h"
 #include "Collider.h"
+#include "SpriteRenderer.h"
+#include "Rigidbody.h"
 
 class Bullet : public GameObject
 {
@@ -15,7 +17,9 @@ public:
 
 private:
 	Vector2<int> destination_;
-	const float kSpeed = 17;
+	SpriteRenderer sprite_renderer_;
 	Collider collider_;
+	Rigidbody rigidbody_;
 	double degree_;
+	const float kSpeed = 17;
 };

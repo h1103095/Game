@@ -5,8 +5,10 @@
 
 Bullet::Bullet(IGameScene& game_scene, Vector2<int> position, Vector2<int> scale)
 	: GameObject(game_scene, position, scale)
-	, destination_(Vector2<int>::Zero())		// 목적지
+	, sprite_renderer_(*this, Sprite::GetInstance(IDB_BULLET), LayerID::PLAYER)
 	, collider_(*this, Vector2<int>::Zero(), Vector2<int>(10, 10), true)
+	, rigidbody_(*this, BodyType::STATIC)
+	, destination_(Vector2<int>::Zero())		// 목적지
 	, degree_(0)		// 각도 계산
 {
 }

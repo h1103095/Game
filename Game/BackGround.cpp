@@ -5,7 +5,7 @@
 BackGround::BackGround(IGameScene& game_scene, Vector2<int> position, Vector2<int> scale)
 	: GameObject(game_scene, position, scale)
 	, sprite_renderer_(*this, Sprite::GetInstance(IDB_BACKGROUND), LayerID::BACKGROUND)
-	, kWidth(2400)
+	, rigidbody_(*this, BodyType::STATIC)
 {
 
 }
@@ -17,8 +17,7 @@ BackGround::~BackGround(void)
 
 void BackGround::Update(const float& delta_time)
 {
-	transform_.Translate(static_cast<int>(kXSpeed * delta_time), 0);
-	if (transform_.GetPosition().GetX() <= -kWidth) {
-		transform_.Translate(kWidth * 2, 0);
+	if (transform_.GetPosition().GetX() <= -WND_X * 2) {
+		transform_.Translate(WND_X * 2, 0);
 	}
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include "Game.h"
 #include "GameObject.h"
 #include "SpriteRenderer.h"
 #include "Rigidbody.h"
@@ -12,6 +13,5 @@ public:
 
 private:
 	SpriteRenderer sprite_renderer_;
-	const int kWidth;
-	const float kXSpeed = -200.0f;
+	Rigidbody rigidbody_;
 };

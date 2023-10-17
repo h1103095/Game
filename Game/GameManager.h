@@ -1,12 +1,12 @@
 #pragma once
 #include <cstdlib>
+#include "Game.h"
 #include "IGameScene.h"
 #include "GameObject.h"
 #include "GroundPatternID.h"
 #include "Vector2.h"
 #include "SpriteRenderer.h"
-#include "Ground.h"
-#include "Coin.h"
+#include "Rigidbody.h"
 
 
 class GameManager: public GameObject
@@ -15,8 +15,8 @@ public:
 	GameManager(IGameScene& game_scene);
 	virtual ~GameManager(void);
 	virtual void Update(const float& delta_time);
-	std::shared_ptr<Ground> CreateGround(Vector2<int> position);
-	std::shared_ptr<Coin> CreateCoin(Vector2<int> position);
+	std::shared_ptr<IGameObject> CreateGround(Vector2<int> position);
+	std::shared_ptr<IGameObject> CreateCoin(Vector2<int> position);
 	void CreateStraightGround(int num_ground, Vector2<int> position, int interval=100);
 	void CreateStraightCoin(int num_ground, Vector2<int> position, int interval=100);
 	void CreateGroundPattern(GroundPatternID pattern_id);

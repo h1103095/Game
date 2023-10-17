@@ -8,7 +8,6 @@ class Animation
 {
 public:
 	Animation(bool loop, float time_interval);
-	//Animation(std::vector<UINT> bitmap_id_vec, bool loop, float time_interval);
 	std::shared_ptr<Sprite> GetNextSprite(void);
 	const float GetTimeInterval(void) const;
 	const bool GetLoop(void) const;

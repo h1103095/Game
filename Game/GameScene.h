@@ -54,7 +54,7 @@ public:
 	virtual afx_msg void OnTimer(UINT_PTR nIDEvent);
 	virtual afx_msg void OnDestroy();
 
-	virtual void OnDraw(CDC* dc);
+	virtual void OnDraw(CDC* pDC);
 	virtual void OnInitialUpdate();
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 #ifdef _DEBUG
@@ -69,7 +69,7 @@ protected:
 	std::map<GameObjectTag, std::vector<std::shared_ptr<IGameObject>>> game_objects_;
 	std::vector<std::shared_ptr<IGameObject>> game_objects_to_delete_;
 	std::vector<std::shared_ptr<IGameObject>> game_objects_to_add_;
-	std::vector<std::weak_ptr<IGameObject>> game_objects_with_Rigidbody_;
+	std::vector<std::weak_ptr<IGameObject>> game_objects_with_rigidbody_;
 	std::vector<std::weak_ptr<IGameObject>> game_objects_with_collider_;
 	std::map<LayerID, std::vector<SpriteRenderer*>> sprite_renderers_;
 	const int kTimerCycle = 15;
