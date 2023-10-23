@@ -8,17 +8,20 @@ Bullet::Bullet(IGameScene& game_scene, Vector2<int> position, Vector2<int> scale
 	, sprite_renderer_(*this, Sprite::GetInstance(IDB_BULLET), LayerID::PLAYER)
 	, collider_(*this, Vector2<int>::Zero(), Vector2<int>(10, 10), true)
 	, rigidbody_(*this, BodyType::STATIC)
-	, destination_(Vector2<int>::Zero())		// 목적지
-	, degree_(0)		// 각도 계산
 {
+	tag_ = GameObjectTag::BULLET;
 }
 
 Bullet::~Bullet(void)
 {
 }
 
-void Bullet::Update(void) {
-	Move();
+void Bullet::Update(const float& delta_time) {
+	int& x = transform_.GetPosition().x;
+	int& y = transform_.GetPosition().y;
+	if (x < 0 || x > WND_X || y < 0 || y > WND_Y) {
+		scene_.Destroy(shared_from_this());
+	}
 }
 
 void Bullet::OnColliderEnter(Collision& collision) {
@@ -26,15 +29,4 @@ void Bullet::OnColliderEnter(Collision& collision) {
 	if (object->GetTag() == GameObjectTag::ENEMY) {
 		scene_.Destroy(object);
 	}
-}
-
-void Bullet::Move(void)
-{
-	transform_.Translate(static_cast<int>(kSpeed * cos(degree_)), static_cast<int>(kSpeed * sin(degree_)));
-	// 총알 이동
-}
-
-void Bullet::SetDestination(Vector2<int> destination) {
-	destination_ = destination;
-	degree_ = atan2f(static_cast<float>(destination_.y - transform_.GetPosition().y), static_cast<float>(destination_.x - transform_.GetPosition().x));
 }

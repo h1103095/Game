@@ -11,7 +11,7 @@
 class Ground: public GameObject
 {
 public:
-	Ground(IGameScene& scene, Vector2<int> position, Vector2<int> scale);
+	Ground(IGameScene& game_scene, Vector2<int> position, Vector2<int> scale);
 	virtual ~Ground(void);
 	virtual void Update(const float& delta_time);
 

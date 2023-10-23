@@ -21,8 +21,11 @@ private:
 	Collider collider_;
 	const float kNumMaxJump_ = 2;
 	const float kJumpForce_ = -500.0f;
-	const float kBulletSpeed = 17.f;
+	const float kBulletSpeed = 500.f;
+	const float kShootInterval = 1.3f;
+	float shoot_cooltime;
 	float jump_cnt_;
 	bool is_on_ground_;
+	bool is_ready_to_shoot;
 };
 

@@ -92,13 +92,15 @@ void GameScene::Destroy(std::shared_ptr<IGameObject> game_object) {
 }
 
 void GameScene::CheckCollisions(void) {
-	for (int i = 0; i < game_objects_with_rigidbody_.size(); i++) {
+	int num_game_objects_with_rigidbody = static_cast<int>(game_objects_with_rigidbody_.size());
+	int num_game_objects_with_collider = static_cast<int>(game_objects_with_collider_.size());
+	for (int i = 0; i < num_game_objects_with_rigidbody; i++) {
 		auto l_object = game_objects_with_rigidbody_[i].lock();
 		Collider* l_collider = l_object.get()->GetComponent<Collider>();
 		if (l_collider == nullptr) {
 			continue;
 		}
-		for (int j = i + 1; j < game_objects_with_collider_.size(); j++) {
+		for (int j = i + 1; j < num_game_objects_with_collider; j++) {
 			auto r_object = game_objects_with_collider_[j].lock();
 			if (l_object == r_object) {
 				continue;
@@ -181,7 +183,7 @@ void GameScene::OnTimer(UINT_PTR nIDEvent) {
 	std::vector<std::shared_ptr<IGameObject>>().swap(game_objects_to_delete_);
 
 	// collider가 있는 게임 오브젝트 weak_ptr 제거
-	for (int i = 0; i < game_objects_with_collider_.size(); i++) {
+	for (int i = 0; i < static_cast<int>(game_objects_with_collider_.size()); i++) {
 		std::shared_ptr<IGameObject> object_with_collider = game_objects_with_collider_[i].lock();
 		if (!object_with_collider) {
 			game_objects_with_collider_.erase(game_objects_with_collider_.begin() + i);

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Player.h"
 
 
@@ -8,8 +8,10 @@ Player::Player(IGameScene& game_scene, Vector2<int> position, Vector2<int> scale
 	, animator_(*this, sprite_renderer_)
 	, rigidbody_(*this, BodyType::DYNAMIC)
 	, collider_(*this, Vector2<int>(40, 82), Vector2<int>(35, 15), false)
+	, shoot_cooltime(0)
 	, jump_cnt_(0)
 	, is_on_ground_(false)
+	, is_ready_to_shoot(true)
 {
 	tag_ = GameObjectTag::PLAYER;
 }
@@ -23,12 +25,32 @@ void Player::Update(const float& delta_time) {
 	if (scene_.GetInputManager().GetKeyDown(Key::SPACE)) {
 		Jump();
 	}
-	if (scene_.GetInputManager().GetKeyDown(Key::LBUTTON)) {
-		std::shared_ptr<IGameObject> bullet = scene_.Instantiate(_T("Bullet"), transform_.GetPosition());
-		// ¸¶¿ì½º ÁöÁ¡°ú ÇÃ·¹ÀÌ¾î À§Ä¡·Î °¢µµ °è»ê
 
-		// ÃÑ¾Ë ¼Óµµ¸¦ »ç¿ëÇÏ¿© xÃà ¼Óµµ¿Í yÃà ¼Óµµ °è»ê
-		// bullet->GetComponent<Rigidbody>()->SetForce();
+	shoot_cooltime -= delta_time;
+	if (shoot_cooltime <= 0) {
+		is_ready_to_shoot = true;
+		shoot_cooltime = 0;
+	}
+
+	if (scene_.GetInputManager().GetKeyDown(Key::LBUTTON)) {
+		if (is_ready_to_shoot) {
+			POINT dest;
+			if (GetCursorPos(&dest)) {
+				std::shared_ptr<IGameObject> bullet = scene_.Instantiate(_T("Bullet"), transform_.GetPosition());
+				// ê°ë„ ê³„ì‚°
+				float degree = atan2f((float)(dest.y - transform_.GetPosition().y), (float)(dest.x - transform_.GetPosition().x));
+
+				float dx = cos(degree);
+				float dy = sin(degree);
+
+				// ì •ê·œí™”
+				float magnitude = sqrt(dx * dx + dy * dy);
+
+				bullet->GetComponent<Rigidbody>()->SetForce(kBulletSpeed * (dx / magnitude), kBulletSpeed * (dy / magnitude));
+				is_ready_to_shoot = false;
+				shoot_cooltime = kShootInterval;
+			}
+		}
 	}
 }
 

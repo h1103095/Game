@@ -18,6 +18,6 @@ BackGround::~BackGround(void)
 void BackGround::Update(const float& delta_time)
 {
 	if (transform_.GetPosition().GetX() <= -WND_X * 2) {
-		transform_.Translate(WND_X * 2, 0);
+		transform_.Translate(WND_X * 4, 0);
 	}
 }

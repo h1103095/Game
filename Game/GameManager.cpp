@@ -204,9 +204,9 @@ void GameManager::CreateGroundPattern(GroundPatternID pattern_id) {
 			//             ㅁㅁ
 			CreateStraightGround(2, Vector2<int>(start_x_pos, cur_ground_height_));
 			CreateStraightGround(2, Vector2<int>(start_x_pos + 600, cur_ground_height_ + 200));
-			CreateStraightCoin(2, Vector2<int>(start_x_pos + 300, cur_ground_height_ - 250), 250);
-			CreateStraightCoin(3, Vector2<int>(start_x_pos + 400, cur_ground_height_ - 350), 50);
-			CreateStraightCoin(1, Vector2<int>(start_x_pos + 600, cur_ground_height_ - 200));
+			CreateStraightCoin(2, Vector2<int>(start_x_pos + 250, cur_ground_height_ - 250), 250);
+			CreateStraightCoin(3, Vector2<int>(start_x_pos + 350, cur_ground_height_ - 350), 50);
+			CreateStraightCoin(1, Vector2<int>(start_x_pos + 550, cur_ground_height_ - 200));
 			cur_ground_height_ += 200;
 			new_ground_length = 1000;
 		}
